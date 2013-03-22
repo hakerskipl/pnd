@@ -4,8 +4,8 @@ from pnd.models import *
 
 class PlaceAdmin(admin.ModelAdmin):
 	list_display = ('name', 'address', 'phone', 'website', 'email')
-    filter_vertical = ['table',]
-    search_fields = ('name', 'address')
+	filter_vertical = ['table',]
+	search_fields = ('name', 'address')
 
 class PlacePhotosAdmin(admin.ModelAdmin):
 	list_display = ('place', 'photo')
