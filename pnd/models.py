@@ -3,23 +3,15 @@ from django.db import models
 
 # Create your models here.
 class Place(models.Model):
-	TABLES = (
-		(1, u'Dwuosobowy'),
-		(2, u'Czteroosobowy'),
-		(3, u'Szejściosobowy'),
-		(4, u'Ośmioosobowy'),
-		(5, u'Dziesięcioosobowy lub większy'),
-	)
-
-	name = models.CharField(max_length=150)
-	desc = models.TextField()
-	address = models.CharField(max_length=200)
-	hour_open = models.TimeField()
-	hour_close = models.TimeField()
-	phone = models.CharField(max_length=20)
-	email = models.EmailField()
-	website = models.URLField()
-	table = models.PositiveSmallIntegerField(choices=TABLES)
+	name = models.CharField(max_length=150, verbose_name=u'Nazwa lokalu')
+	desc = models.TextField(null=True, verbose_name=u'Opis')
+	address = models.CharField(max_length=200, verbose_name=u'Adres')
+	hour_open = models.TimeField(null=True, verbose_name=u'Godzina otwarcia')
+	hour_close = models.TimeField(null=True, verbose_name=u'Godzina zamknięcia')
+	phone = models.CharField(max_length=20, null=True, verbose_name=u'Telefon')
+	email = models.EmailField(null=True, verbose_name=u'Email')
+	website = models.URLField(null=True, verbose_name=u'Strona www')
+	places_uid = models.TextField(null=True, verbose_name=u'UID Google Places API')
 
 
 	def __unicode__(self):
@@ -30,10 +22,30 @@ class Place(models.Model):
 		verbose_name_plural = u'Lokale'
 		ordering = ['name',]
 
+class PlaceTables(models.Model):
+	TABLES = (
+		(1, u'Dwuosobowy'),
+		(2, u'Czteroosobowy'),
+		(3, u'Szejściosobowy'),
+		(4, u'Ośmioosobowy'),
+		(5, u'Dziesięcioosobowy lub większy'),
+	)
+
+	place = models.ForeignKey('Place', verbose_name=u'Lokal')
+	table = models.PositiveSmallIntegerField(choices=TABLES, verbose_name=u'Stolik')
+	quantity = models.PositiveSmallIntegerField(verbose_name=u'Ilość')
+
+	def __unicode__(self):
+		return u'Stoliki w ' + self.place.name
+
+	class Meta:
+		verbose_name = u'Stolik'
+		verbose_name_plural = u'Stoliki'
+
 class PlacePhotos(models.Model):
-	place = models.ForeignKey('Place')
-	photo = models.ImageField(upload_to='/places/')
-	desc = models.TextField()
+	place = models.ForeignKey('Place', verbose_name=u'Lokal')
+	photo = models.ImageField(upload_to='/places/', verbose_name=u'Zdjęcie')
+	desc = models.TextField(verbose_name=u'Opis')
 
 	def __unicode__(self):
 		return u'Zdjęcie lokalu ' + self.place.name
@@ -43,10 +55,10 @@ class PlacePhotos(models.Model):
 		verbose_name_plural = u'Zdjęcia lokalu'
 
 class PlaceMenu(models.Model):
-	place = models.ForeignKey('Place')
-	name = models.CharField(max_length=150)
-	desc = models.TextField()
-	price = models.CharField(max_length=10)
+	place = models.ForeignKey('Place', verbose_name=u'Lokal')
+	name = models.CharField(max_length=150, verbose_name='Nazwa pozycji')
+	desc = models.TextField(verbose_name=u'Opis')
+	price = models.CharField(max_length=10, verbose_name=u'Cena')
 
 	def __unicode__(self):
 		return self.name + ' w ' + self.place.name
