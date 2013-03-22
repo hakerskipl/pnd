@@ -9,7 +9,7 @@ class PlaceAdmin(admin.ModelAdmin):
 
 class PlacePhotosAdmin(admin.ModelAdmin):
 	list_display = ('place', 'photo')
-	ordering = ['place', 'pk']
+	ordering = ['place', 'id']
 	search_fields = ('place__name',)
 
 class PlaceMenuAdmin(admin.ModelAdmin):
