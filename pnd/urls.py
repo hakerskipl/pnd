@@ -3,6 +3,6 @@ from pnd.views import *
 
 urlpatterns = patterns('',
     url(r'^index/$', index, name='index'),
-    url(r'^results/$', index, name='results'),
-    url(r'^detail/$', index, name='detail'),
+    url(r'^results/$', results, name='results'),
+    url(r'^detail/$', detail, name='detail'),
 )
