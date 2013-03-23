@@ -23,6 +23,7 @@ def fetchData(request):
     for city in streets:
         i = 0
         response = response + u'<br><br><b>Ulica: ' + city + u'</b><br><br>'
+        search_types = ['name', 'keyword']
         keywords = ['restauracja', 'bar', 'pub', 'pizzeria', 'grill']
         request_url = "http://maps.googleapis.com/maps/api/geocode/json?sensor=false&address=" + city + ",Torun,Poland"
         city_req = urllib2.Request(request_url)
@@ -30,6 +31,7 @@ def fetchData(request):
         city_f = city_opener.open(city_req)
         city_data = json.load(city_f)
         for word in keywords:
+
             req_url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + str(city_data['results'][0]['geometry']['location']['lat']) + "," + str(city_data['results'][0]['geometry']['location']['lng']) + "&radius=50&language=pl&name=" + word + "&sensor=false&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk"
             response = response + u'URL zapytania: ' + req_url + u'<br><br>'
             req = urllib2.Request(req_url)
