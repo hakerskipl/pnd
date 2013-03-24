@@ -73,7 +73,7 @@ def insertFetchData(data):
                 )
             
            
-            req2 = urllib2.Request("https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&reference=" + data['reference'])
+            req2 = urllib2.Request("https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&language=pl&reference=" + data['reference'])
             opener2 = urllib2.build_opener()
             f2 = opener2.open(req2)
             data2 = json.load(f2)
@@ -101,7 +101,22 @@ def insertFetchData(data):
                 new.hour_close = data2['opening_hours']['periods']['close']
             except:
                 pass
-            
             new.save()
+            
+            # Zdjęcia
+            
+            photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + data2['result']['photos'][0]['photo_reference']
+            photoRequest = urllib2.Request(photoRequestURL)
+            photoOpener = urllib2.build_opener()
+            photoStream = photoOpener.open(photoRequest)
+            lol
+            new_photo = PlacePhotos(
+                place=new,
+                photo=None,
+                desc=None
+            )
+            
+
+            
             response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
     return response
