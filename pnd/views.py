@@ -50,29 +50,7 @@ def fetchData(request):
                 req = urllib2.Request(req_url)
                 opener = urllib2.build_opener()
                 f = opener.open(req)
-                data = json.load(f)
-            
-                req2_url = req_url + "&pagetoken=" + data['next_page_token']
-                req2 = urllib2.Request(req2_url)
-                opener3 = urllib2.build_opener()
-                f2 = opener3.open(req2)
-                data2 = json.load(f2)
-                response = response + u'Token: ' + data['next_page_token'] + u'<br><br>'
-                try:
-                    req3_url = req_url + "&pagetoken=" + data2['next_page_token']
-                    req3 = urllib2.Request(req3_url)
-                    opener4 = urllib2.build_opener()
-                    f3 = opener4.open(req3)
-                    data3 = json.load(f3)
-                    response = response + u'Token (poziom 2): ' + data2['next_page_token'] + u'<br><br>'
-                    resp3 = insertFetchData(data3)
-                    response = response + resp3
-                except:
-                    pass
-                resp2 = insertFetchData(data2)
-                lol
-                response = response + resp2
-                
+                data = json.load(f)               
                 resp = insertFetchData(data)
                 response = response + resp
     return HttpResponse(response)
