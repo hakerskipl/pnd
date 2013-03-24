@@ -29,75 +29,101 @@ def fetchData(request):
         city_f = city_opener.open(city_req)
         city_data = json.load(city_f)
 
-        search_types = ['name', 'keyword', 'type']
+        search_types = ['keyword', 'name', 'type']
         for st in search_types:
             if st == 'type':
                 keywords = ['art_gallery', 'cafe', 'movie_theater', 'lodging', 'food', 'museum', 'night_club', 'restaurant', 'zoo']
             else:
                 keywords = ['restauracja', 'bar', 'pub', 'pizzeria', 'grill']
-            response = response + u'Typ szukania: <i>' + st + u'<br><br>'
+            response = response + u'<br>Typ szukania: <i>' + st + u'</i><br>'
             for word in keywords:
                 req_url = "https://maps.googleapis.com/maps/api/place/search/json?location=" + str(city_data['results'][0]['geometry']['location']['lat']) + "," + str(city_data['results'][0]['geometry']['location']['lng']) + "&radius=50&language=pl&"
                 if st == 'type':
                     req_url = req_url + "types=" + word
-                if st == 'keyword':
-                    req_url = req_url + "keyword=" + word
                 else:
-                    req_url = req_url + "name=" + word
+                    if st == 'keyword':
+                        req_url = req_url + "keyword=" + word
+                    else:
+                        req_url = req_url + "name=" + word
                 req_url = req_url + "&sensor=false&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk"
-                response = response + u'Słowo kluczowe: <i>' + word + u'</i><br><br>' + u'URL zapytania: ' + req_url + u'<br><br>'
+                response = response + u'<br>Słowo kluczowe: <i>' + word + u'</i><br><br>' + u'URL zapytania: ' + req_url + u'<br><br>'
                 req = urllib2.Request(req_url)
                 opener = urllib2.build_opener()
-                opener2 = urllib2.build_opener()
                 f = opener.open(req)
                 data = json.load(f)
+            
+                req2_url = req_url + "&pagetoken=" + data['next_page_token']
+                req2 = urllib2.Request(req2_url)
+                opener3 = urllib2.build_opener()
+                f2 = opener3.open(req2)
+                data2 = json.load(f2)
+                response = response + u'Token: ' + data['next_page_token'] + u'<br><br>'
                 try:
-                    response = response + u'Token: ' + data['next_page_token'] + u'<br><br>' 
+                    req3_url = req_url + "&pagetoken=" + data2['next_page_token']
+                    req3 = urllib2.Request(req3_url)
+                    opener4 = urllib2.build_opener()
+                    f3 = opener4.open(req3)
+                    data3 = json.load(f3)
+                    response = response + u'Token (poziom 2): ' + data2['next_page_token'] + u'<br><br>'
+                    resp3 = insertFetchData(data3)
+                    response = response + resp3
                 except:
                     pass
-                for data in data['results']:
-                    response = response + u'Lokal ' + data['name'] + u'<br>' + u'ID: ' + data['id'] + u'<br>'
-                    if (Place.objects.filter(places_uid__contains = data['id']).count() <= 0):
-                        response = response + u'Test ID: ' + str(Place.objects.filter(places_uid__contains = data['id']).count()) + u'<br>'
-                        new = Place(name=data['name'], 
-                            desc=None,
-                            address=None,
-                            hour_open=None,
-                            hour_close=None,
-                            phone=None,
-                            email=None,
-                            website=None,
-                            places_uid=data['id']
-                            )
-                        
-                        try:
-                            req2 = urllib2.Request("https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&reference=" + data['reference'])
-                            f2 = opener2.open(req2)
-                            data2 = json.load(f2)
-                            
-                            try:
-                                new.address = data2['result']['formatted_address']
-                            except:
-                                pass
-                            try:
-                                new.phone = data2['result']['formatted_phone_number']
-                            except:
-                                pass
-                            try:
-                                new.website = data2['result']['website']
-                            except:
-                                pass
-                            try:
-                                new.hour_open = data2['opening_hours']['periods']['open']['time']
-                            except:
-                                pass
-                            try:
-                                new.hour_close = data2['opening_hours']['periods']['close']
-                            except:
-                                pass
-                        except:
-                            pass
-                        i = i +1
-                        new.save()
-                        response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
+                resp2 = insertFetchData(data2)
+                lol
+                response = response + resp2
+                
+                resp = insertFetchData(data)
+                response = response + resp
     return HttpResponse(response)
+
+def insertFetchData(data):
+    response = u''
+    for data in data['results']:
+        response = response + u'Lokal ' + data['name'] + u'<br>' + u'ID: ' + data['id'] + u'<br>'
+        if (Place.objects.filter(places_uid__contains = data['id']).count() <= 0):
+            response = response + u'Test ID: ' + str(Place.objects.filter(places_uid__contains = data['id']).count()) + u'<br>'
+            new = Place(name=data['name'], 
+                desc=None,
+                address=None,
+                hour_open=None,
+                hour_close=None,
+                phone=None,
+                email=None,
+                website=None,
+                places_uid=data['id']
+                )
+            
+           
+            req2 = urllib2.Request("https://maps.googleapis.com/maps/api/place/details/json?key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&reference=" + data['reference'])
+            opener2 = urllib2.build_opener()
+            f2 = opener2.open(req2)
+            data2 = json.load(f2)
+            
+            try:
+                new.address = data2['result']['formatted_address']
+            except:
+                try:
+                    new.address = data2['result']['vicinity']
+                except:
+                    pass
+            try:
+                new.phone = data2['result']['formatted_phone_number']
+            except:
+                pass
+            try:
+                new.website = data2['result']['website']
+            except:
+                pass
+            try:
+                new.hour_open = data2['opening_hours']['periods']['open']['time']
+            except:
+                pass
+            try:
+                new.hour_close = data2['opening_hours']['periods']['close']
+            except:
+                pass
+            
+            new.save()
+            response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
+    return response
