@@ -44,7 +44,7 @@ class PlaceTables(models.Model):
 
 class PlacePhotos(models.Model):
 	place = models.ForeignKey('Place', verbose_name=u'Lokal')
-	photo = models.ImageField(upload_to='/places/', verbose_name=u'Zdjęcie')
+	photo = models.ImageField(upload_to='places/', verbose_name=u'Zdjęcie')
 	desc = models.TextField(null=True, default=None, verbose_name=u'Opis')
 
 	def __unicode__(self):

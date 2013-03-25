@@ -4,13 +4,15 @@ from django.template import RequestContext
 from pnd.models import *
 
 def index(request):
-	return render_to_response('index.html', context_instance=RequestContext(request))
+    return render_to_response('index.html', context_instance=RequestContext(request))
 
 def results(request):
-	return render_to_response('wyniki.html', context_instance=RequestContext(request))
+    allPlaces = Place.objects.all()
+    return render_to_response('wyniki.html', {'allPlaces': allPlaces}, context_instance=RequestContext(request))
 
-def detail(request):
-	return render_to_response('detail.html', context_instance=RequestContext(request))
+def detail(request, id):
+    placeData = Place.objects.get(pk=id)
+    return render_to_response('detail.html', {'place': placeData}, context_instance=RequestContext(request))
 
 # Google Place API
 
@@ -105,18 +107,32 @@ def insertFetchData(data):
             
             # Zdjęcia
             
-            photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + data2['result']['photos'][0]['photo_reference']
-            photoRequest = urllib2.Request(photoRequestURL)
-            photoOpener = urllib2.build_opener()
-            photoStream = photoOpener.open(photoRequest)
-            lol
-            new_photo = PlacePhotos(
-                place=new,
-                photo=None,
-                desc=None
-            )
-            
+            from django.core.files import File
+            from django.core.files.temp import NamedTemporaryFile
+            from urlparse import urlparse
 
+            img_temp = NamedTemporaryFile(delete=True)
+            
+            try:
+                for pht in data2['result']['photos']:
+
+                    photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + pht['photo_reference']
+                    name = urlparse(photoRequestURL).path.split('/')[-1]
+
+                    img_temp.write(urllib2.urlopen(photoRequestURL).read())
+                    img_temp.flush()
+                    
+                    new_photo = PlacePhotos(
+                        place=new,
+                        photo=None,
+                        desc=None
+                    )
+
+                    new_photo.photo.save(name, File(img_temp), save=False)
+                    
+                    new_photo.save()
+            except:
+                pass
             
             response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
     return response
