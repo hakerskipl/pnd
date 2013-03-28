@@ -1,3 +1,4 @@
+{% load compress %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -12,12 +13,16 @@
 
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
-        <link rel="stylesheet" href="{{STATIC_URL}}css/bootstrap.css">
+        {% compress css %}
+        <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/bootstrap/bootstrap.less">
         <!-- <link rel="stylesheet" href="css/responsive.css"> -->
-        <link rel="stylesheet" href="{{STATIC_URL}}css/project.css">
+        <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/project.less">
         <!-- <link rel="stylesheet" href="css/typeplate.css"> -->
+        {% endcompress %}
+        {% compress js %}
         <script src="{{STATIC_URL}}js/vendor/modernizr-2.6.2.min.js"></script>
         <script src="{{STATIC_URL}}js/vendor/selectivizr-min.js"></script>
+        {% endcompress %}
     </head>
     <body>
         <!--[if lt IE 7]>
