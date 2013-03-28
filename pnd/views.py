@@ -116,6 +116,8 @@ def insertFetchData(data):
             try:
                 for pht in data2['result']['photos']:
 
+                    response = response + "<br>Zdjęcie: " + pht + "<br>"
+
                     photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + pht['photo_reference']
                     name = urlparse(photoRequestURL).path.split('/')[-1] + ".jpg"
 
