@@ -2,5 +2,4 @@
 .*swp
 *.~pyc
 *.~swp
-/media/*.*
-media/*.jpg
+media/
