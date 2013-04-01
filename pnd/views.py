@@ -110,8 +110,6 @@ def insertFetchData(data):
             from django.core.files import File
             from django.core.files.temp import NamedTemporaryFile
             from urlparse import urlparse
-
-            img_temp = NamedTemporaryFile(delete=True)
             
             try:
                 for pht in data2['result']['photos']:
@@ -121,6 +119,7 @@ def insertFetchData(data):
                     photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + pht['photo_reference']
                     name = urlparse(photoRequestURL).path.split('/')[-1] + ".jpg"
 
+                    img_temp = NamedTemporaryFile(delete=True)
                     img_temp.write(urllib2.urlopen(photoRequestURL).read())
                     img_temp.flush()
                     
