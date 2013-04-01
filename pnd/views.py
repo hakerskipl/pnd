@@ -113,27 +113,28 @@ def insertFetchData(data):
 
             img_temp = NamedTemporaryFile(delete=True)
             
-            
-            for pht in data2['result']['photos']:
+            try:
+                for pht in data2['result']['photos']:
 
-                response = response + "<br>Zdjęcie: " + pht['photo_reference'] + "<br>"
+                    response = response + u"<br>Zdjęcie: " + pht['photo_reference'] + u"<br>"
 
-                photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + pht['photo_reference']
-                name = urlparse(photoRequestURL).path.split('/')[-1] + ".jpg"
+                    photoRequestURL = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=1600&key=AIzaSyDDOcaI9GNdrmjoBTviEfIKU86U1QqxnBk&sensor=false&photoreference=" + pht['photo_reference']
+                    name = urlparse(photoRequestURL).path.split('/')[-1] + ".jpg"
 
-                img_temp.write(urllib2.urlopen(photoRequestURL).read())
-                img_temp.flush()
-                
-                new_photo = PlacePhotos(
-                    place=new,
-                    photo=None,
-                    desc=None
-                )
+                    img_temp.write(urllib2.urlopen(photoRequestURL).read())
+                    img_temp.flush()
+                    
+                    new_photo = PlacePhotos(
+                        place=new,
+                        photo=None,
+                        desc=None
+                    )
 
-                new_photo.photo.save(name, File(img_temp), save=False)
-                
-                new_photo.save()
-            
+                    new_photo.photo.save(name, File(img_temp), save=False)
+                    
+                    new_photo.save()
+            except:
+                pass
             
             response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
     return response
