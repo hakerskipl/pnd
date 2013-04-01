@@ -34,7 +34,7 @@ def fetchData(request):
         search_types = ['keyword', 'name', 'type']
         for st in search_types:
             if st == 'type':
-                keywords = ['art_gallery', 'cafe', 'movie_theater', 'lodging', 'food', 'museum', 'night_club', 'restaurant', 'zoo']
+                keywords = ['night_club', 'restaurant', 'cafe', 'art_gallery',  'movie_theater', 'lodging', 'food', 'museum', 'zoo']
             else:
                 keywords = ['restauracja', 'bar', 'pub', 'pizzeria', 'grill']
             response = response + u'<br>Typ szukania: <i>' + st + u'</i><br>'
