@@ -1,5 +1,7 @@
 #-*- coding: utf-8 -*-
 from django.db import models
+from imagekit.models import ProcessedImageField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class Place(models.Model):
@@ -56,6 +58,7 @@ class PlaceTables(models.Model):
 class PlacePhotos(models.Model):
 	place = models.ForeignKey('Place', verbose_name=u'Lokal')
 	photo = models.ImageField(upload_to='media/places/', verbose_name=u'Zdjęcie')
+	photo_thumbnail = ProcessedImageField(upload_to='media/places_thumbnails/', processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 80}, verbose_name=u'Miniatura')
 	desc = models.TextField(null=True, default=None, verbose_name=u'Opis')
 
 	def __unicode__(self):

@@ -126,14 +126,17 @@ def insertFetchData(data):
                     new_photo = PlacePhotos(
                         place=new,
                         photo=None,
+                        photo_thumbnail=None,
                         desc=None
                     )
 
                     new_photo.photo.save(name, File(img_temp), save=False)
+                    new_photo.photo_thumbnail.save(name, File(img_temp), save=False)
                     
                     new_photo.save()
             except:
                 pass
+            
             
             response = response + u'Dodane: <b>' + new.name + u'</b>  ' + str(new.id) + u'<br><br>'
     return response
