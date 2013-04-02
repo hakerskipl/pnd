@@ -1,10 +1,13 @@
 #-*- coding: utf-8 -*-
 from django.shortcuts import render_to_response
 from django.template import RequestContext
+from datetime import date
 from pnd.models import *
 
 def index(request):
-    return render_to_response('index.html', context_instance=RequestContext(request))
+    today = date.today()
+    todaysIdea = TodaysIdea.objects.get(date__exact=today)
+    return render_to_response('index.html', {'idea':todaysIdea}, context_instance=RequestContext(request))
 
 def results(request):
     allPlaces = Place.objects.all()

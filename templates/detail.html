@@ -8,8 +8,13 @@
                     </div>
                     <div>
                         <i class="icon-group"></i> Ilość miejsc:
-                        <span>2x stolik dwuosobowy</span>
-                        <span>6x stolik sieściosobowy</span>
+                        {% if place.tables.all %}
+                        {% for table in place.tables.all %}
+                        <span>{{ table.quantity }}x Stolik {{ table.get_table_display }}</span>
+                        {% endfor %}
+                        {% else %}
+                        <br><small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie</small>
+                        {% endif %}
                     </div>
                     <div>
                         <i class="icon-screenshot"></i> Adres:
@@ -23,38 +28,30 @@
                 <article class="information span8">
                     <h1>{{ place.name }}</h1>
                     <p>{{ place.desc }}</p>
+                    {% if place.menu.all %}
                     <div>
                         <h2>Menu:</h2>
                         <dl>
-                            <dt>Amber Boy (12zł)</dt>
-                            <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. </dd>
-                            <dt>Amber Boy (12zł)</dt>
-                            <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. </dd>
-                            <dt>Amber Boy (12zł)</dt>
-                            <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. </dd>
-                            <dt>Amber Boy (12zł)</dt>
-                            <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. </dd>
-                            <dt>Amber Boy (12zł)</dt>
-                            <dd>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                            tempor incididunt ut labore et dolore magna aliqua. </dd>
+                            {% for menu in place.menu.all %}
+                            <dt>{{ menu.name }} ({{ menu.prize }}zł)</dt>
+                            <dd>{{ menu.desc }} </dd>
+                            {% endfor %}
                         </dl>
                     </div>
+                    {% endif %}
+                    {% if place.photos.all %}
                     <div>
                         <h2>Galeria:</h2>
                         <div>
-                            <a href="#"><img src="http://placehold.it/100x100" class="img-rounded"></a>
-                            <a href="#"><img src="http://placehold.it/100x100" class="img-rounded"></a>
-                            <a href="#"><img src="http://placehold.it/100x100" class="img-rounded"></a>
-                            <a href="#"><img src="http://placehold.it/100x100" class="img-rounded"></a>
+                            {% for img in place.photos.all %}
+                            <a href="{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="Frans Hals, Banquet of the Officers of the St George Civic Guard, 1627"><img src="http://placehold.it/100x100" class="img-rounded"></a>
+                            {% endfor %}
                         </div>
                     </div>
+                    {% endif %}
                     <div>
                         <h2>Komentarze:</h2>
-                        <div class="fb-comments" data-href="http://example.com" data-width="470" data-num-posts="10"></div>
+                        <div class="fb-comments" data-href="{% url 'detail' place.id %}" data-width="470" data-num-posts="10"></div>
                     </div>
             </section>
 {% endblock %}

@@ -23,13 +23,21 @@
                 <aside class="span4">
                     <div class="kontener">
                         <h3>Nasz pomysł:</h3>
+                        {% if idea %}
+                        {% if idea.photo %}
+                        <img src="{{ idea.photo }}" alt="{{ idea.place.name }}">
+                        {% endif %}
                         <address>
-                            <strong>Twitter, Inc.</strong><br>
-                            795 Folsom Ave, Suite 600<br>
-                            San Francisco, CA 94107<br>
-                            <abbr title="Phone">P:</abbr> (123) 456-7890
+                            <strong>{{ idea.place.name }}</strong><br>
+                            {{ idea.place.address }}<br>
+                            <!-- <abbr title="Menu">Proponujemy:</abbr><br>
+                            {% for tag in idea.place.tags.all %}
+                                {{ tag }}
+                            {% endfor %} -->
+                            <p>{{ idea.slogan }}</p>
                         </address>
-                        <a href="#" class="btn btn-large btn-block">Zobacz naszą propozycję!</a>
+                        <a href="{% url 'detail' idea.place.id %}" class="btn btn-large btn-block">Zobacz naszą propozycję!</a>
+                        {% endif %}
                     </div>
                 </aside>
             </section>

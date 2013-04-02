@@ -1,11 +1,13 @@
 #-*- coding: utf-8 -*-
 from django.db import models
+from datetime import date
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
 
 # Create your models here.
 class Place(models.Model):
 	name = models.CharField(max_length=150, verbose_name=u'Nazwa lokalu')
+	short = models.TextField(null=True, verbose_name=u'Krótki opis')
 	desc = models.TextField(null=True, verbose_name=u'Opis')
 	address = models.CharField(max_length=200, verbose_name=u'Adres')
 	hour_open = models.TimeField(null=True, verbose_name=u'Godzina otwarcia')
@@ -44,7 +46,7 @@ class PlaceTables(models.Model):
 		(5, u'Dziesięcioosobowy lub większy'),
 	)
 
-	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='stoliki')
+	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='tables')
 	table = models.PositiveSmallIntegerField(choices=TABLES, verbose_name=u'Stolik')
 	quantity = models.PositiveSmallIntegerField(verbose_name=u'Ilość')
 
@@ -56,7 +58,7 @@ class PlaceTables(models.Model):
 		verbose_name_plural = u'Stoliki'
 
 class PlacePhotos(models.Model):
-	place = models.ForeignKey('Place', verbose_name=u'Lokal')
+	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='photos')
 	photo = models.ImageField(upload_to='media/places/', verbose_name=u'Zdjęcie')
 	photo_thumbnail = ProcessedImageField(upload_to='media/places_thumbnails/', processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 80}, verbose_name=u'Miniatura')
 	desc = models.TextField(null=True, default=None, verbose_name=u'Opis')
@@ -69,7 +71,7 @@ class PlacePhotos(models.Model):
 		verbose_name_plural = u'Zdjęcia lokalu'
 
 class PlaceMenu(models.Model):
-	place = models.ForeignKey('Place', verbose_name=u'Lokal')
+	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='menu')
 	name = models.CharField(max_length=150, verbose_name='Nazwa pozycji')
 	desc = models.TextField(verbose_name=u'Opis')
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, verbose_name=u'Cena')
@@ -84,8 +86,9 @@ class PlaceMenu(models.Model):
 
 class TodaysIdea(models.Model):
 	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='pomysly')
-	date = models.DateField(auto_now_add=True, verbose_name=u'Data projekcji')
+	date = models.DateField(default=date.today(), verbose_name=u'Data projekcji')
 	slogan = models.CharField(max_length=150, null=True, default=None, verbose_name=u'Krótki opis (do 150 znaków)')
+	photo = ProcessedImageField(upload_to='media/todays_idea/', processors=[ResizeToFill(500, 350)], format='JPEG', options={'quality': 90}, verbose_name=u'Zdjęcie promocyjne', null=True, default=None)
 
 	def __unicode__(self):
 		return u'Promocja lokalu ' + self.place.name
