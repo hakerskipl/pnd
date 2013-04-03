@@ -6,7 +6,10 @@ from pnd.models import *
 
 def index(request):
     today = date.today()
-    todaysIdea = TodaysIdea.objects.get(date__exact=today)
+    try:
+        todaysIdea = TodaysIdea.objects.get(date__exact=today)
+    except:
+        todaysIdea = None
     return render_to_response('index.html', {'idea':todaysIdea}, context_instance=RequestContext(request))
 
 def results(request):

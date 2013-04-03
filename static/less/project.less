@@ -15,6 +15,10 @@
           box-shadow: @shadow;
 }
 
+.fontStyle1() {
+  font-family: 'Open Sans', sans-serif;
+}
+
 // OWN CLASSES
 .btn-xlarge {
   padding: 14px 25px;
@@ -70,6 +74,10 @@ body {
 	background-position:center;
 }
 
+h2, h3 { 
+  .fontStyle1();
+}
+
 header.row {
 	background-color: #fff;
 	.box-shadow(0px 0px 5px #333);
@@ -94,11 +102,12 @@ section.hello-unit {
     margin-bottom: 0.495rem;
     text-rendering: geometricPrecision;
     line-height: 1.25;
-    font-family: 'Open Sans', sans-serif;
+    .fontStyle1();
   }
 
   a {
     margin-right: 10em;
+    .fontStyle1();
   }
 }
 
@@ -125,6 +134,10 @@ section.main {
 
     li > div.first {
       margin-left: 0px;
+    }
+
+    a {
+      .fontStyle1();
     }
   }
 
