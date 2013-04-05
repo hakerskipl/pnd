@@ -74,7 +74,7 @@ body {
 	background-position:center;
 }
 
-h2, h3 { 
+h1, h2, h3 { 
   .fontStyle1();
 }
 
@@ -102,7 +102,6 @@ section.hello-unit {
     margin-bottom: 0.495rem;
     text-rendering: geometricPrecision;
     line-height: 1.25;
-    .fontStyle1();
   }
 
   a {
@@ -117,6 +116,7 @@ section.main {
   .box-shadow(0px 0px 5px #333);
   overflow: hidden;
 
+  // Strona Główna
   article {
 
     ul {
@@ -136,7 +136,7 @@ section.main {
       margin-left: 0px;
     }
 
-    a {
+    li > a {
       .fontStyle1();
     }
   }
@@ -164,6 +164,8 @@ section.main {
           margin: 10px auto;
           display: block;
           width: 70%;
+          .fontStyle1();
+          font-weight: bold;
         }
       }
     }
@@ -183,10 +185,15 @@ section.main {
 
   // Deatil page stylings
   article.information {
-
+    a > img {
+      padding: 5px;
+      .border-radius(10px);
+    }
   }
 
   aside.details {
+    .fontStyle1();
+
     & > div {
       margin: 10px 5px 15px 5px;
       font-size: 1.2em;
