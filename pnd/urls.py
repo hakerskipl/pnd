@@ -6,5 +6,7 @@ urlpatterns = patterns('',
     url(r'^results/$', results, name='results'),
     url(r'^detail/(?P<id>\d+)/$', detail, name='detail'),
 
+    url(r'^szukaj/$', search, name='search'),
+
     url(r'^fetch/$', fetchData, name='fetchData'),
 )

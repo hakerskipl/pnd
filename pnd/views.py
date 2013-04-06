@@ -1,8 +1,10 @@
 #-*- coding: utf-8 -*-
-from django.shortcuts import render_to_response
+from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
+from django.db.models import Q
 from datetime import date
 from pnd.models import *
+from pnd.forms import *
 
 def index(request):
     today = date.today()
@@ -19,6 +21,18 @@ def results(request):
 def detail(request, id):
     placeData = Place.objects.get(pk=id)
     return render_to_response('detail.html', {'place': placeData}, context_instance=RequestContext(request))
+
+def search(request):
+    if request.method == 'POST':
+        #Szukanie
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            results = Place.objects.filter(Q(name__contains=form.cleaned_data['szukaj']) | Q(address__contains=form.cleaned_data['szukaj']))
+            return render_to_response('wyniki.html', {'allPlaces': results, 'keyword': form.cleaned_data['szukaj']}, context_instance=RequestContext(request))
+        else:
+            return redirect('index')
+    else:
+        return redirect('index')
 
 # Google Place API
 

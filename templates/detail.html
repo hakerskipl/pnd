@@ -4,7 +4,12 @@
                 <aside class="span4 details">
                     <div>
                         <i class="icon-time"></i> Godziny otwarcia:
-                        <span>8:00 - 23:00</span>
+                        {% if place.hour_open and place.hour_close %}
+                        <span>{{ place.hour_open }} - {{ place.hour_close }}</span>
+                        {% else %}
+                        <br>
+                        <small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie bądź osobiście.</small>
+                        {% endif %}
                     </div>
                     <div>
                         <i class="icon-group"></i> Ilość miejsc:
@@ -13,7 +18,7 @@
                         <span>{{ table.quantity }}x Stolik {{ table.get_table_display }}</span>
                         {% endfor %}
                         {% else %}
-                        <br><small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie</small>
+                        <br><small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie bądź osobiście.</small>
                         {% endif %}
                     </div>
                     <div>
@@ -27,7 +32,11 @@
                 </aside>
                 <article class="information span8">
                     <h1>{{ place.name }}</h1>
+                    {% if place.desc %}
                     <p>{{ place.desc }}</p>
+                    {% else %}
+                    <p>Przepraszamy ale nie posiadamy więcej informacji na temat danego lokalu. Cały czas aktualizujemy naszą bazę wiedzy, prosimy o chwilę cierpliwości i zapraszamy ponownie później. Jeśli mają Państwo więcej informacji o tym lokalu prosimy o komentarz bądź kontakt z nami.</p>
+                    {% endif %}
                     {% if place.menu.all %}
                     <div>
                         <h2>Menu:</h2>

@@ -51,7 +51,7 @@
                 </div>
                 <div class="span8 szukajka">
                     <div class="input-append">
-                        <form action="" method="POST">
+                        <form action="{% url 'search' %}" method="POST">{% csrf_token %}
                             <input type="text" name="szukaj" value="" placeholder="wpisz nazwę lokalu lub ulicę" class="span6">
                             <button class="btn" type="button"><i class="icon-search"></i></button>
                         </form>

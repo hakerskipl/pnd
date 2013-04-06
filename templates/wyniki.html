@@ -5,11 +5,21 @@
                 <article class="span12 serp">
                     <header class="row">
                         <div>
+                            {% if keyword %}
+                            <h1>Wyniki wyszukiwania</h1>
+                            <p class="lead">Słowo kluczowe: {{ keyword }}</p>
+                            {% endif %}
+                            {% if not keyword %}
                             <h1>Lokale dla 5-8 osób:</h1>
+                            {% endif %}
                             <ul class="breadcrumb">
                                 <li><a href="#">Strona główna</a> <span class="divider">/</span></li>
                                 <li><a href="#">Wyszukiwarka</a> <span class="divider">/</span></li>
+                                {% if keyword %}
+                                <li class="active">Wyniki ({{ keyword }})</li>
+                                {% else %}
                                 <li class="active">Wyniki (lokal dla 5-8 osób)</li>
+                                {% endif %}
                             </ul>
                         </div>
                     </header>
@@ -33,7 +43,9 @@
                             </div>
                         </div>
                     </div>
+                    {% if not forloop.last %}
                     <hr>
+                    {% endif %}
                     {% endfor %}
                 </article>
             </section>
