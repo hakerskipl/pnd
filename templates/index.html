@@ -37,6 +37,9 @@
                             <p>{{ idea.slogan }}</p>
                         </address>
                         <a href="{% url 'detail' idea.place.id %}" class="btn btn-large btn-block">Zobacz naszą propozycję!</a>
+                        {% else %}
+                        <p>Niestety dziś zabrało nam kreatywności aby zdobyć dla Ciebie idealną propozycję na dziś. Mamy jednak dla Ciebie coś innego - niech los zdecyduje gdzie dziś pójdziesz:</p>
+                        <a href="#" class="btn btn-large btn-block btn-success">Szczęśliwy traf!</a>
                         {% endif %}
                     </div>
                 </aside>
