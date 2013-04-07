@@ -2,6 +2,8 @@
 from django.shortcuts import render_to_response, redirect
 from django.template import RequestContext
 from django.db.models import Q
+from django.utils import simplejson as json
+from django.http import HttpResponse
 from datetime import date
 from pnd.models import *
 from pnd.forms import *
@@ -34,11 +36,21 @@ def search(request):
     else:
         return redirect('index')
 
+def typeahead(request, search):
+    if search == '':
+        data = Place.objects.values('name')
+    else:
+        data = Place.objects.filter(name__contains=search).only('name')
+    json_data = []
+    for place in data:
+        json_data.append(place.name)
+    
+    response = json.dumps(json_data)
+    return HttpResponse(response, mimetype="application/json")
+
 # Google Place API
 
 import urllib2
-from django.utils import simplejson as json
-from django.http import HttpResponse
 def fetchData(request):
     streets = ['Szeroka', 'Piekary', 'Zeglarska', 'Mostowa', 'Wielkie%20Garbary', 'Prosta', 'Rynek%20Staromiejski', 'Strumykowa', 'Piekary', 'Chelminska', 'Szewska', 'Przedzamcze', 'Kopernika', 'Rabianska', 'Podmurna', 'Prosta', 'Sukiennicza', 'Wysoka', 'Rynek%20Nowomiejski']
     response = u''

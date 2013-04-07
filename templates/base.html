@@ -52,7 +52,7 @@
                 <div class="span8 szukajka">
                     <div class="input-append">
                         <form action="{% url 'search' %}" method="POST">{% csrf_token %}
-                            <input type="text" name="szukaj" value="" placeholder="wpisz nazwę lokalu lub ulicę" class="span6">
+                            <input type="text" name="szukaj" value="" placeholder="wpisz nazwę lokalu lub ulicę" class="span6 search">
                             <button class="btn" type="button"><i class="icon-search"></i></button>
                         </form>
                     </div>
@@ -106,8 +106,9 @@
         {% endblock %}
 
         {% compress js %}
-        <script src="{{STATIC_URL}}js/main.js"></script>
         <script src="{{STATIC_URL}}js/fresco.js"></script>
+        <script src="{{STATIC_URL}}js/typeahead.js"></script>
+        <script src="{{STATIC_URL}}js/main.js"></script>
         {% block js %}
         {% endblock %}
         {% endcompress %}

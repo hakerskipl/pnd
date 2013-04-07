@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     url(r'^detail/(?P<id>\d+)/$', detail, name='detail'),
 
     url(r'^szukaj/$', search, name='search'),
+    url(r'^typeahead/(?P<search>\w+)/$', typeahead, name='typeahead'),
 
     url(r'^fetch/$', fetchData, name='fetchData'),
 )
