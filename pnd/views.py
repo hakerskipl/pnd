@@ -36,6 +36,11 @@ def search(request):
     else:
         return redirect('index')
 
+def feelLucky(request):
+    number_of_records = Place.objects.count()
+    random_index = int(random.random()*number_of_records)+1
+    return redirect('detail', random_index)
+
 def typeahead(request, search):
    # if search == '':
     data = Place.objects.only('name')
