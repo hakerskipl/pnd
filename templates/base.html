@@ -49,7 +49,7 @@
                 <div class="span2 fb">
                     <div class="fb-like" data-href="http://www.facebook.com/PomyslNaDzis" data-send="false" data-layout="button_count" data-width="100" data-show-faces="false" data-font="segoe ui"></div>
                 </div>
-                <div class="span8 szukajka">
+                <div class="span8 szukajka hidden-phone">
                     <div class="input-append">
                         <form action="{% url 'search' %}" method="POST">{% csrf_token %}
                             <input type="text" name="szukaj" value="" placeholder="wpisz nazwę lokalu lub ulicę" class="span6 search">
@@ -58,7 +58,7 @@
                     </div>
                 </div>
             </header>
-            <section class="row hello-unit">
+            <section class="row hello-unit hidden-phone">
                 <div class="span12">
                     <h1>Czas zrobić coś innego!</h1>
                     <a href="#" class="btn btn-xlarge btn-cta pull-right">Kliknij tu!</a>
