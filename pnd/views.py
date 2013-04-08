@@ -37,10 +37,10 @@ def search(request):
         return redirect('index')
 
 def typeahead(request, search):
-    if search == '':
-        data = Place.objects.values('name')
-    else:
-        data = Place.objects.filter(name__contains=search).only('name')
+   # if search == '':
+    data = Place.objects.only('name')
+    #else:
+    #    data = Place.objects.filter(name__contains=search).only('name')
     json_data = []
     for place in data:
         json_data.append(place.name)
