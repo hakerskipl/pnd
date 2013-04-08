@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.utils import simplejson as json
 from django.http import HttpResponse
 from datetime import date
+import random
 from pnd.models import *
 from pnd.forms import *
 
@@ -37,6 +38,7 @@ def search(request):
         return redirect('index')
 
 def feelLucky(request):
+    random.seed()
     number_of_records = Place.objects.count()
     random_index = int(random.random()*number_of_records)+1
     return redirect('detail', random_index)
