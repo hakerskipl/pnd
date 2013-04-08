@@ -23,6 +23,11 @@
                             </ul>
                         </div>
                     </header>
+                    {% if not allPlaces %}
+                    <dif class="row">
+                        <h3>Niestety nie znaleziono żadnego lokalu pasującego do tego słowa kluczowego.</h3>
+                    </dif>
+                    {% endif %}
                     {% for place in allPlaces %}
                     <div class="result row">
                         <hgroup class="span8">
