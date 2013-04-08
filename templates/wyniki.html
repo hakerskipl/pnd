@@ -13,8 +13,8 @@
                             <h1>Lokale dla 5-8 osób:</h1>
                             {% endif %}
                             <ul class="breadcrumb">
-                                <li><a href="#">Strona główna</a> <span class="divider">/</span></li>
-                                <li><a href="#">Wyszukiwarka</a> <span class="divider">/</span></li>
+                                <li><a href="{% url 'index' %}">Strona główna</a> <span class="divider">/</span></li>
+                                <li><a href="{% url 'index' %}">Wyszukiwarka</a> <span class="divider">/</span></li>
                                 {% if keyword %}
                                 <li class="active">Wyniki ({{ keyword }})</li>
                                 {% else %}
