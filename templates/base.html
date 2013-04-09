@@ -18,6 +18,8 @@
         <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/bootstrap/responsive.less">
         <link rel="stylesheet" href="{{STATIC_URL}}css/fresco.css">
         <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/project.less">
+        <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/project-mobile.less">
+        <link rel="stylesheet" type="text/less" href="{{STATIC_URL}}less/project-1200px.less">
         <!-- <link rel="stylesheet" href="css/typeplate.css"> -->
         {% endcompress %}
         {% compress js %}
@@ -43,7 +45,7 @@
         <!-- Code -->
         <div class="container">
             <header class="row">
-                <div class="span2">
+                <div class="span2 logo">
                     <a href="{% url 'index' %}"><img src="{{STATIC_URL}}img/logo.png" alt=""></a>
                 </div>
                 <div class="span2 fb">
@@ -90,7 +92,7 @@
                     </p>
                 </div>
                 <!-- Odnośniki do portali społecznościowych -->
-                <div class="span3">
+                <div class="span3 social">
                     <a href="#"><i class="social-fb"></i></a>
                     <a href="#"><i class="social-gp"></i></a>
                     <a href="#"><i class="social-tw"></i></a>

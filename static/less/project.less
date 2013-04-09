@@ -29,15 +29,15 @@
 [class^="social-"],
 [class*=" social-"] {
   display: inline-block;
-  width: 64px;
-  height: 64px;
+  width: 48px;
+  height: 48px;
   // .ie7-restore-right-whitespace();
-  line-height: 64px;
+  line-height: 48px;
   vertical-align: text-top;
   background-image: url("../img/social.png");
   background-position: 0px 0px;
   background-repeat: no-repeat;
-  background-size: 192px 128px;
+  background-size: 144px 96px;
   margin-top: 1px;
 }
 
@@ -45,34 +45,27 @@
   background-position: 0px 0px;
 
   &:hover{
-    background-position: 0px -64px;
+    background-position: 0px -48px;
   }
 }
 
 .social-gp {
-  background-position: -64px 0px;
+  background-position: -48px 0px;
 
   &:hover {
-    background-position: -64px -64px;
+    background-position: -48px -48px;
   }
 }
 
 .social-tw {
-  background-position: -128px 0px;
+  background-position: -96px 0px;
 
   &:hover {
-    background-position: -128px -64px;
+    background-position: -96px -48px;
   }
 }
 
 // CODE
-
-body {
-	background-image: url('../img/P1050805_filtered.jpg');
-	background-repeat:no-repeat;
-	background-attachment:fixed;
-	background-position:center;
-}
 
 h1, h2, h3 { 
   .fontStyle1();
@@ -80,7 +73,6 @@ h1, h2, h3 {
 
 header.row {
 	background-color: #fff;
-	.box-shadow(0px 0px 5px #333);
 
 	img {
 		margin: 10px 0px;
@@ -113,7 +105,6 @@ section.hello-unit {
 section.main {
   background-color: #fff;
   padding-bottom: 10px;
-  .box-shadow(0px 0px 5px #333);
   overflow: hidden;
 
   // Strona Główna
@@ -225,7 +216,6 @@ section.main {
 footer {
   background-color: #333;
   padding-top: 10px;
-  .box-shadow(0 8px 6px -6px black);
 
   p {
     color: #eee;
@@ -267,4 +257,49 @@ footer {
   color: #fff !important;
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.33);
   -webkit-font-smoothing: antialiased;
+}
+
+
+@media (min-width: 480px) {
+  body {
+    background-repeat:no-repeat;
+    background-attachment:fixed;
+    background-position:center;
+  }
+
+  header.row {
+    .box-shadow(0px 0px 5px #333);
+  }
+
+  section.main {
+    .box-shadow(0px 0px 5px #333);
+  }
+
+  footer {
+    .box-shadow(0 8px 6px -6px black);
+  }
+}
+
+@media (min-width: 768px) and (max-width: 979px) {
+  body {
+    background-image: url('../img/background_1024.jpg');
+  }
+}
+
+@media (min-width: 1025px) {
+  body {
+    background-image: url('../img/background_1440.jpg');
+  }
+}
+
+@media (min-width: 1441px) {
+  body {
+    background-image: url('../img/background_1920.jpg');
+  }
+}
+
+@media (min-width: 1921px) {
+  body {
+    background-image: url('../img/background_full.jpg');
+  }
 }
