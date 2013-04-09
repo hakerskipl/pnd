@@ -2,7 +2,7 @@
 import os
 PROJECT_DIR = os.path.dirname(__file__)
 
-DEBUG = TEMPLATE_DEBUG = False
+DEBUG = TEMPLATE_DEBUG = True
 
 ADMINS = (
     ('Hakerski', 'mateusz@pomyslnadzis.pl'),
