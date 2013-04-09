@@ -10,5 +10,8 @@ urlpatterns = patterns('',
     url(r'^szukaj/$', search, name='search'),
     url(r'^typeahead/(?P<search>\w+)/$', typeahead, name='typeahead'),
 
+    url(r'^404/$', Error404, name='404'),
+    url(r'^500/$', Error500, name='500'),
+
     url(r'^fetch/$', fetchData, name='fetchData'),
 )

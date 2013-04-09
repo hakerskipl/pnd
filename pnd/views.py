@@ -4,6 +4,7 @@ from django.template import RequestContext
 from django.db.models import Q
 from django.utils import simplejson as json
 from django.http import HttpResponse
+from django.views.generic import TemplateView
 from datetime import date
 import random
 from pnd.models import *
@@ -54,6 +55,12 @@ def typeahead(request, search):
     
     response = json.dumps(json_data)
     return HttpResponse(response, mimetype="application/json")
+
+class Error404(TemplateView):
+    template_name = "404.html"
+
+class Error500(TemplateView):
+    template_name = "500.html"
 
 # Google Place API
 

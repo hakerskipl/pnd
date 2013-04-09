@@ -15,3 +15,6 @@ urlpatterns = patterns('',
     # Uncomment the next line to enable the admin:
     url(r'^admin/', include(admin.site.urls)),
 )
+
+# handler404 = 'pnd.views.Error404'
+# handler500 = 'pnd.views.Error500'
