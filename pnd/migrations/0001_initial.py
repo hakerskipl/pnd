@@ -12,6 +12,8 @@ class Migration(SchemaMigration):
         db.create_table(u'pnd_place', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
+            ('slug', self.gf('autoslug.fields.AutoSlugField')(unique=True, max_length=50, populate_from='name', unique_with=())),
+            ('short', self.gf('django.db.models.fields.TextField')(null=True)),
             ('desc', self.gf('django.db.models.fields.TextField')(null=True)),
             ('address', self.gf('django.db.models.fields.CharField')(max_length=200)),
             ('hour_open', self.gf('django.db.models.fields.TimeField')(null=True)),
@@ -35,13 +37,14 @@ class Migration(SchemaMigration):
         db.create_table(u'pnd_tags', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=100)),
+            ('icon', self.gf('django.db.models.fields.CharField')(max_length=50)),
         ))
         db.send_create_signal(u'pnd', ['Tags'])
 
         # Adding model 'PlaceTables'
         db.create_table(u'pnd_placetables', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('place', self.gf('django.db.models.fields.related.ForeignKey')(related_name='stoliki', to=orm['pnd.Place'])),
+            ('place', self.gf('django.db.models.fields.related.ForeignKey')(related_name='tables', to=orm['pnd.Place'])),
             ('table', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
             ('quantity', self.gf('django.db.models.fields.PositiveSmallIntegerField')()),
         ))
@@ -50,7 +53,7 @@ class Migration(SchemaMigration):
         # Adding model 'PlacePhotos'
         db.create_table(u'pnd_placephotos', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('place', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['pnd.Place'])),
+            ('place', self.gf('django.db.models.fields.related.ForeignKey')(related_name='photos', to=orm['pnd.Place'])),
             ('photo', self.gf('django.db.models.fields.files.ImageField')(max_length=100)),
             ('photo_thumbnail', self.gf('imagekit.models.fields.ProcessedImageField')(max_length=100)),
             ('desc', self.gf('django.db.models.fields.TextField')(default=None, null=True)),
@@ -60,7 +63,7 @@ class Migration(SchemaMigration):
         # Adding model 'PlaceMenu'
         db.create_table(u'pnd_placemenu', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
-            ('place', self.gf('django.db.models.fields.related.ForeignKey')(to=orm['pnd.Place'])),
+            ('place', self.gf('django.db.models.fields.related.ForeignKey')(related_name='menu', to=orm['pnd.Place'])),
             ('name', self.gf('django.db.models.fields.CharField')(max_length=150)),
             ('desc', self.gf('django.db.models.fields.TextField')()),
             ('price', self.gf('django.db.models.fields.DecimalField')(default=0.0, max_digits=5, decimal_places=2)),
@@ -71,8 +74,9 @@ class Migration(SchemaMigration):
         db.create_table(u'pnd_todaysidea', (
             (u'id', self.gf('django.db.models.fields.AutoField')(primary_key=True)),
             ('place', self.gf('django.db.models.fields.related.ForeignKey')(related_name='pomysly', to=orm['pnd.Place'])),
-            ('date', self.gf('django.db.models.fields.DateField')(auto_now_add=True, blank=True)),
+            ('date', self.gf('django.db.models.fields.DateField')(default=datetime.datetime(2013, 4, 10, 0, 0))),
             ('slogan', self.gf('django.db.models.fields.CharField')(default=None, max_length=150, null=True)),
+            ('photo', self.gf('imagekit.models.fields.ProcessedImageField')(default=None, max_length=100, null=True)),
         ))
         db.send_create_signal(u'pnd', ['TodaysIdea'])
 
@@ -112,6 +116,8 @@ class Migration(SchemaMigration):
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
             'phone': ('django.db.models.fields.CharField', [], {'max_length': '20', 'null': 'True'}),
             'places_uid': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'short': ('django.db.models.fields.TextField', [], {'null': 'True'}),
+            'slug': ('autoslug.fields.AutoSlugField', [], {'unique': 'True', 'max_length': '50', 'populate_from': "'name'", 'unique_with': '()'}),
             'tags': ('django.db.models.fields.related.ManyToManyField', [], {'to': u"orm['pnd.Tags']", 'symmetrical': 'False'}),
             'website': ('django.db.models.fields.URLField', [], {'max_length': '200', 'null': 'True'})
         },
@@ -120,7 +126,7 @@ class Migration(SchemaMigration):
             'desc': ('django.db.models.fields.TextField', [], {}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '150'}),
-            'place': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['pnd.Place']"}),
+            'place': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'menu'", 'to': u"orm['pnd.Place']"}),
             'price': ('django.db.models.fields.DecimalField', [], {'default': '0.0', 'max_digits': '5', 'decimal_places': '2'})
         },
         u'pnd.placephotos': {
@@ -129,24 +135,26 @@ class Migration(SchemaMigration):
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'photo': ('django.db.models.fields.files.ImageField', [], {'max_length': '100'}),
             'photo_thumbnail': ('imagekit.models.fields.ProcessedImageField', [], {'max_length': '100'}),
-            'place': ('django.db.models.fields.related.ForeignKey', [], {'to': u"orm['pnd.Place']"})
+            'place': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'photos'", 'to': u"orm['pnd.Place']"})
         },
         u'pnd.placetables': {
             'Meta': {'object_name': 'PlaceTables'},
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
-            'place': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'stoliki'", 'to': u"orm['pnd.Place']"}),
+            'place': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'tables'", 'to': u"orm['pnd.Place']"}),
             'quantity': ('django.db.models.fields.PositiveSmallIntegerField', [], {}),
             'table': ('django.db.models.fields.PositiveSmallIntegerField', [], {})
         },
         u'pnd.tags': {
             'Meta': {'ordering': "['name']", 'object_name': 'Tags'},
+            'icon': ('django.db.models.fields.CharField', [], {'max_length': '50'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
             'name': ('django.db.models.fields.CharField', [], {'max_length': '100'})
         },
         u'pnd.todaysidea': {
             'Meta': {'ordering': "['-date']", 'object_name': 'TodaysIdea'},
-            'date': ('django.db.models.fields.DateField', [], {'auto_now_add': 'True', 'blank': 'True'}),
+            'date': ('django.db.models.fields.DateField', [], {'default': 'datetime.datetime(2013, 4, 10, 0, 0)'}),
             u'id': ('django.db.models.fields.AutoField', [], {'primary_key': 'True'}),
+            'photo': ('imagekit.models.fields.ProcessedImageField', [], {'default': 'None', 'max_length': '100', 'null': 'True'}),
             'place': ('django.db.models.fields.related.ForeignKey', [], {'related_name': "'pomysly'", 'to': u"orm['pnd.Place']"}),
             'slogan': ('django.db.models.fields.CharField', [], {'default': 'None', 'max_length': '150', 'null': 'True'})
         }

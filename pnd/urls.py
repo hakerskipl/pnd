@@ -15,3 +15,9 @@ urlpatterns = patterns('',
 
     url(r'^fetch/$', fetchData, name='fetchData'),
 )
+
+urlpatterns += patterns('django.contrib.flatpages.views',
+    url(r'^kontakt/$', 'flatpage', {'url': '/kontakt/'}, name='kontakt'),
+    url(r'^regulamin/$', 'flatpage', {'url': '/regulamin/'}, name='regulamin'),
+    url(r'^polityka-prywatnosci/$', 'flatpage', {'url': '/polityka-prywatnosci/'}, name='polityka-prywatnosci'),
+)

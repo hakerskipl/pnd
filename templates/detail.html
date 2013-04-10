@@ -80,7 +80,13 @@
 map = new GMaps({
   div: '#map',
   lat: 53.01379,
-  lng: 18.59844
+  lng: 18.59844,
+  panControl: false,
+  zoomControl: false,
+  mapTypeControl: false,
+  scaleControl: false,
+  streetViewControl: false,
+  overviewMapControl: false
 });
 GMaps.geocode({
   address: "{{ place.address }}",

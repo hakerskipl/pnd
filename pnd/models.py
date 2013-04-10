@@ -3,10 +3,12 @@ from django.db import models
 from datetime import date
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
+from autoslug import AutoSlugField
 
 # Create your models here.
 class Place(models.Model):
 	name = models.CharField(max_length=150, verbose_name=u'Nazwa lokalu')
+	slug = AutoSlugField(populate_from='name', unique=True, always_update=True, verbose_name=u'Slug')
 	short = models.TextField(null=True, verbose_name=u'Krótki opis')
 	desc = models.TextField(null=True, verbose_name=u'Opis')
 	address = models.CharField(max_length=200, verbose_name=u'Adres')
@@ -28,6 +30,7 @@ class Place(models.Model):
 
 class Tags(models.Model):
 	name = models.CharField(max_length=100, verbose_name=u'Tag')
+	icon = models.CharField(max_length=50, verbose_name=u'Klasa CSS ikony')
 
 	def __unicode__(self):
 		return u'Tag ' + self.name
