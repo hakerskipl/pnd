@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load compress %}
 {% block main %}
             <section class="row main" role="main">
                 <aside class="span4 details">
@@ -67,8 +68,14 @@
 {% block js-nc %}
 <script src="http://maps.google.com/maps/api/js?sensor=true"></script>
 {% endblock %}
-{% block js %}
+{% block js-comp %}
+
+{% compress js %}
+<script src="{{STATIC_URL}}js/fresco.js"></script>  
 <script src="{{STATIC_URL}}js/gmaps.js"></script>
+<script src="{{STATIC_URL}}js/main.js"></script>
+{% endcompress %}
+
 <script>
 map = new GMaps({
   div: '#map',
@@ -89,4 +96,6 @@ GMaps.geocode({
   }
 });
 </script>
+
+
 {% endblock %}

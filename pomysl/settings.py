@@ -117,6 +117,15 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_ROOT = PROJECT_DIR + '/../static/'
 
+COMPRESS_OFFLINE = True
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1:11211',
+    }
+}
+
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
     # Always use forward slashes, even on Windows.

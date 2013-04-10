@@ -107,12 +107,8 @@
         {% block js-nc %}
         {% endblock %}
 
-        {% compress js %}
-        <script src="{{STATIC_URL}}js/fresco.js"></script>  
-        <script src="{{STATIC_URL}}js/main.js"></script>
-        {% block js %}
+        {% block js-comp %}
         {% endblock %}
-        {% endcompress %}
 
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. 
         <script>
