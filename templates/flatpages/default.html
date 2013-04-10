@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}{{ flatpage.title }}{% endblock %}
+{% block main %}
+            <section class="row main" role="main">
+                <!-- Sekcja główna -->
+                <div class="span12">
+                	{{ flatpage.content }}
+                </div>
+            </section>
+{% endblock %}
