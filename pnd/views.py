@@ -16,9 +16,10 @@ def index(request):
         todaysIdea = TodaysIdea.objects.get(date__exact=today)
     except:
         todaysIdea = None
-    return render_to_response('index.html', {'idea':todaysIdea}, context_instance=RequestContext(request))
+    tags = Tags.objects.filter(home=True)
+    return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags}, context_instance=RequestContext(request))
 
-def results(request):
+def results(request, slug):
     allPlaces = Place.objects.all()
     return render_to_response('wyniki.html', {'allPlaces': allPlaces}, context_instance=RequestContext(request))
 

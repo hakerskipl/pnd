@@ -31,6 +31,8 @@ class Place(models.Model):
 class Tags(models.Model):
 	name = models.CharField(max_length=100, verbose_name=u'Tag')
 	icon = models.CharField(max_length=50, verbose_name=u'Klasa CSS ikony')
+	slug = AutoSlugField(populate_from='name', unique=True, always_update=True, verbose_name=u'Slug')
+	home = models.BooleanField(default=False, verbose_name=u'Pokaż na stronie głównej')
 
 	def __unicode__(self):
 		return u'Tag ' + self.name

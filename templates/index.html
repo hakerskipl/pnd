@@ -5,20 +5,13 @@
             <section class="row main" role="main">
                 <!-- Sekcja główna z wyszukiwarką -->
                 <article class="span8">
-                    <h2>Ile osób zabierasz na miasto?</h2>
+                    <h2>Co chcesz zrobić na mieście?</h2>
                     <ul class="row">
+                        {% for tag in tags %}
                         <li class="span4">
-                            <div class="first"><a href="{% url 'results' %}" class="btn btn-xlarge btn-block btn-search">2 osoby</a></div>
+                            <div class="first"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search">{{ tag.name }}</a></div>
                         </li>
-                        <li class="span4">
-                            <div><a href="{% url 'results' %}" class="btn btn-xlarge btn-block btn-search">3/4 osoby</a></div>
-                        </li>
-                        <li class="span4">
-                            <div class="first"><a href="{% url 'results' %}" class="btn btn-xlarge btn-block btn-search">5-8 osób</a></div>
-                        </li>
-                        <li class="span4">
-                            <div><a href="{% url 'results' %}" class="btn btn-xlarge btn-block btn-search">9+ osób</a></div>
-                        </li>
+                        {% endfor %}
                     </ul>
                 </article>
                 <!-- Sidebar z reklamą -->
