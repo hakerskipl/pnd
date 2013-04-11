@@ -34,17 +34,23 @@
                     <div class="result row">
                         <hgroup class="span8">
                             <h2>{{ place.name }}</h2>
+                            {% if place.short %}
                             <p>{{ place.short }}</p>
+                            {% endif %}
                         </hgroup>
                         <div class="span4">
+                            {% if place.hour_open and place.hour_close %}
                             <div class="hours span2">
                                 <i class="icon-time"></i> Otwarte: 
                                 <span>8:00 - 23:00</span>
                             </div>
+                            {% endif %}
+                            {% if place.tables.all %}
                             <div class="people span2">
                                 <i class="icon-group"></i> Ilość osób: 
                                 <span>5-8</span>
                             </div>
+                            {% endif %}
                             <div class="span4 see-more">
                                 <a href="{% url 'detail' place.slug %}" class="btn btn-large btn-warning">Zobacz lokal <i class="icon-double-angle-right"></i></a>
                             </div>
