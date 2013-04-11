@@ -22,8 +22,8 @@ def results(request):
     allPlaces = Place.objects.all()
     return render_to_response('wyniki.html', {'allPlaces': allPlaces}, context_instance=RequestContext(request))
 
-def detail(request, id):
-    placeData = Place.objects.get(pk=id)
+def detail(request, slug):
+    placeData = Place.objects.get(slug=slug)
     return render_to_response('detail.html', {'place': placeData}, context_instance=RequestContext(request))
 
 def search(request):
