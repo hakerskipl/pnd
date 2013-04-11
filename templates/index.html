@@ -9,7 +9,7 @@
                     <ul class="row">
                         {% for tag in tags %}
                         <li class="span4">
-                            <div class="first"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search">{{ tag.name }}</a></div>
+                            <div class="first"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search">{{ tag.desc }}</a></div>
                         </li>
                         {% endfor %}
                     </ul>

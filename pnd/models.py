@@ -30,9 +30,11 @@ class Place(models.Model):
 
 class Tags(models.Model):
 	name = models.CharField(max_length=100, verbose_name=u'Tag')
-	icon = models.CharField(max_length=50, verbose_name=u'Klasa CSS ikony')
+	desc = models.CharField(max_length=150, verbose_name=u'Tekst wyświetlany na stronie głównej', null=True, blank=True, default=None)
+	icon = models.CharField(max_length=50, verbose_name=u'Klasa CSS ikony', blank=True, null=True, default=None)
 	slug = AutoSlugField(populate_from='name', unique=True, always_update=True, verbose_name=u'Slug')
 	home = models.BooleanField(default=False, verbose_name=u'Pokaż na stronie głównej')
+	order = models.PositiveSmallIntegerField(default=100, verbose_name=u'Kolejność wyświetlania')
 
 	def __unicode__(self):
 		return u'Tag ' + self.name
@@ -40,7 +42,7 @@ class Tags(models.Model):
 	class Meta:
 		verbose_name = u'Tag'
 		verbose_name_plural = u'Tagi'
-		ordering = ['name']
+		ordering = ['order']
 
 class PlaceTables(models.Model):
 	TABLES = (
