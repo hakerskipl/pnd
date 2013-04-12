@@ -11,7 +11,7 @@
                         <span>{{ place.hour_open }} - {{ place.hour_close }}</span>
                         {% else %}
                         <br>
-                        <small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie bądź osobiście.</small>
+                        <small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie, bądź osobiście.</small>
                         {% endif %}
                     </div>
                     <div>
@@ -21,7 +21,7 @@
                         <span>{{ table.quantity }}x Stolik {{ table.get_table_display }}</span>
                         {% endfor %}
                         {% else %}
-                        <br><small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie bądź osobiście.</small>
+                        <br><small>Przepraszamy za brak danych. Prosimy skontaktować się z lokalem telefonicznie, bądź osobiście.</small>
                         {% endif %}
                     </div>
                     <div>
@@ -38,7 +38,7 @@
                     {% if place.desc %}
                     <p>{{ place.desc }}</p>
                     {% else %}
-                    <p>Przepraszamy ale nie posiadamy więcej informacji na temat danego lokalu. Cały czas aktualizujemy naszą bazę wiedzy, prosimy o chwilę cierpliwości i zapraszamy ponownie później. Jeśli mają Państwo więcej informacji o tym lokalu prosimy o komentarz bądź kontakt z nami.</p>
+                    <p>Przepraszamy, ale nie posiadamy więcej informacji na temat danego lokalu. Cały czas aktualizujemy naszą bazę wiedzy, prosimy o chwilę cierpliwości i zapraszamy ponownie później. Jeśli mają Państwo więcej informacji o tym lokalu prosimy o komentarz, bądź kontakt z nami.</p>
                     {% endif %}
                     {% if place.menu.all %}
                     <div>
@@ -56,7 +56,7 @@
                         <h2>Galeria:</h2>
                         <div>
                             {% for img in place.photos.all %}
-                            <a href="{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="Frans Hals, Banquet of the Officers of the St George Civic Guard, 1627"><img src="http://placehold.it/100x100"></a>
+                            <a href="{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="Frans Hals, Banquet of the Officers of the St George Civic Guard, 1627"><img src="{{ img.photo_thumbnail }}"></a>
                             {% endfor %}
                         </div>
                     </div>
