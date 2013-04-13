@@ -1,6 +1,6 @@
 {% extends "base.html" %}
-{% block title %}{% endblock %}
-{% block description %}{% endblock %}
+{% block title %}Pizza, piwo, kawa, czekolada, imprezy, cluby - Pomysł na dziś :: Toruń{% endblock %}
+{% block description %}Szukasz miejsca na wypad z przyjaciólmi? Chcesz poznać smak regionalnego piwa? Kliknij i znajdź resturacje na dziś!{% endblock %}
 {% block main %}
             <section class="row main" role="main">
                 <!-- Sekcja główna z wyszukiwarką -->
@@ -9,7 +9,7 @@
                     <ul class="row">
                         {% for tag in tags %}
                         <li class="span4">
-                            <div class="first"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search">{{ tag.desc }}</a></div>
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search"><div>{{ tag.desc }}</div></a></div>
                         </li>
                         {% endfor %}
                     </ul>
@@ -39,4 +39,11 @@
                     </div>
                 </aside>
             </section>
+{% endblock %}
+{% block js-comp %}
+{% load compress %}
+{% compress js %}
+<script src="{{STATIC_URL}}js/vendor/underscore.js"></script>  
+<script src="{{STATIC_URL}}js/index.js"></script>  
+{% endcompress %}
 {% endblock %}
