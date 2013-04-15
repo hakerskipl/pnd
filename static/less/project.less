@@ -34,7 +34,7 @@
   // .ie7-restore-right-whitespace();
   line-height: 48px;
   vertical-align: text-top;
-  background-image: url("../img/social.png");
+  background-image: url("{{STATIC_URL}}img/social.png");
   background-position: 0px 0px;
   background-repeat: no-repeat;
   background-size: 144px 96px;
@@ -282,24 +282,24 @@ footer {
 
 @media (min-width: 768px) and (max-width: 1024px) {
   body {
-    background-image: url('../img/background_1024.jpg');
+    background-image: url('{{STATIC_URL}}img/background_1024.jpg');
   }
 }
 
 @media (min-width: 1025px) {
   body {
-    background-image: url('../img/background_1440.jpg');
+    background-image: url('{{STATIC_URL}}img/background_1440.jpg');
   }
 }
 
 @media (min-width: 1441px) {
   body {
-    background-image: url('../img/background_1920.jpg');
+    background-image: url('{{STATIC_URL}}img/background_1920.jpg');
   }
 }
 
 @media (min-width: 1921px) {
   body {
-    background-image: url('../img/background_full.jpg');
+    background-image: url('{{STATIC_URL}}img/background_full.jpg');
   }
 }
