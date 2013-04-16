@@ -68,7 +68,7 @@ class PlacePhotos(models.Model):
 	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='photos')
 	photo = models.ImageField(upload_to='media/places/', verbose_name=u'Zdjęcie')
 	photo_thumbnail = ProcessedImageField(upload_to='media/places_thumbnails/', processors=[ResizeToFill(100, 100)], format='JPEG', options={'quality': 80}, verbose_name=u'Miniatura')
-	desc = models.TextField(null=True, default=None, verbose_name=u'Opis')
+	desc = models.TextField(null=True, blank=True, default=None, verbose_name=u'Opis')
 
 	def __unicode__(self):
 		return u'Zdjęcie lokalu ' + self.place.name
@@ -80,7 +80,7 @@ class PlacePhotos(models.Model):
 class PlaceMenu(models.Model):
 	place = models.ForeignKey('Place', verbose_name=u'Lokal', related_name='menu')
 	name = models.CharField(max_length=150, verbose_name='Nazwa pozycji')
-	desc = models.TextField(verbose_name=u'Opis')
+	desc = models.TextField(blank=True, null=True, default=None, verbose_name=u'Opis')
 	price = models.DecimalField(max_digits=5, decimal_places=2, default=0.00, verbose_name=u'Cena')
 
 	def __unicode__(self):
