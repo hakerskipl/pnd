@@ -123,14 +123,18 @@ COMPRESS_ROOT = PROJECT_DIR + '/../static/'
 
 COMPRESS_OFFLINE = True
 
+COMPRESS_YUI_BINARY = 'yui-compressor'
+
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
     'compressor.filters.cssmin.CSSMinFilter',
+    'compressor.filters.yui.YUICSSFilter',
 ]
 
 COMPRESSOR_JS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
     'compressor.filters.jsmin.JSMinFilter',
+    'compressor.filters.yui.YUIJSFilter',
 ]
 
 COMPRESS_OUTPUT_DIR = 'min'
