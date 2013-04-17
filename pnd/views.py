@@ -20,7 +20,7 @@ def index(request):
     return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags}, context_instance=RequestContext(request))
 
 def results(request, slug):
-    allPlaces = Place.objects.all()
+    allPlaces = Place.objects.filter(tags__slug__exact=slug)
     return render_to_response('wyniki.html', {'allPlaces': allPlaces}, context_instance=RequestContext(request))
 
 def detail(request, slug):
