@@ -56,7 +56,7 @@
                         <h2>Galeria:</h2>
                         <div>
                             {% for img in place.photos.all %}
-                            <a href="/{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="{{ img.desc }}"><img src="/{{ img.photo_thumbnail }}"></a>
+                            <a href="/{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="{{ img.desc }}" title="Zdjęcie lokalu {{ place.name }}"><img src="/{{ img.photo_thumbnail }}"></a>
                             {% endfor %}
                         </div>
                     </div>

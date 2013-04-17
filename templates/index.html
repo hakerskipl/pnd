@@ -9,7 +9,7 @@
                     <ul class="row">
                         {% for tag in tags %}
                         <li class="span4">
-                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search"><div>{{ tag.desc }}</div></a></div>
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search" title="{{ tag.name }} w Toruniu"><div>{{ tag.desc }}</div></a></div>
                         </li>
                         {% endfor %}
                     </ul>
@@ -17,7 +17,11 @@
                 <!-- Sidebar z reklamą -->
                 <aside class="span4">
                     <div class="kontener">
+                        {% if idea %}
                         <h3>Nasz pomysł:</h3>
+                        {% else %}
+                        <h3>Poczuj Toruń!</h3>
+                        {% endif %}
                         {% if idea %}
                         {% if idea.photo %}
                         <img src="{{ idea.photo }}" alt="{{ idea.place.name }}">
@@ -31,10 +35,10 @@
                             {% endfor %} -->
                             <p>{{ idea.slogan }}</p>
                         </address>
-                        <a href="{% url 'detail' idea.place.id %}" class="btn btn-large btn-block">Zobacz naszą propozycję!</a>
+                        <a href="{% url 'detail' idea.place.id %}" class="btn btn-large btn-block" title="Nasza restauracja na dziś">Zobacz naszą propozycję!</a>
                         {% else %}
                         <p>Zakręć kołem fortuny, zdaj się na los i odkryj nową duszę Torunia. <b>Kliknij</b> i zrób coś innego!</p>
-                        <a href="{% url 'feelLucky' %}" class="btn btn-large btn-block btn-success">Szczęśliwy traf!</a>
+                        <a href="{% url 'feelLucky' %}" class="btn btn-large btn-block btn-success" title="Wylosuj sobie restauracje na dziś">Szczęśliwy traf!</a>
                         {% endif %}
                     </div>
                 </aside>

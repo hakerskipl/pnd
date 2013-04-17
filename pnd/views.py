@@ -43,7 +43,8 @@ def feelLucky(request):
     random.seed()
     number_of_records = Place.objects.count()
     random_index = int(random.random()*number_of_records)+1
-    return redirect('detail', random_index)
+    place = Place.objects.get(pk=random_index)
+    return redirect('detail', place.slug)
 
 def typeahead(request, search):
    # if search == '':

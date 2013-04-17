@@ -15,12 +15,12 @@
                             <h1>Lokale dla 5-8 osób:</h1>
                             {% endif %}
                             <ul class="breadcrumb">
-                                <li><a href="{% url 'index' %}">Strona główna</a> <span class="divider">/</span></li>
-                                <li><a href="{% url 'index' %}">Wyszukiwarka</a> <span class="divider">/</span></li>
+                                <li><a href="{% url 'index' %}" title="Powrót do strony głównej">Strona główna</a> <span class="divider">/</span></li>
+                                <li><a href="{% url 'index' %}" title="Powró do wyszukiwarki restauracji">Wyszukiwarka</a> <span class="divider">/</span></li>
                                 {% if keyword %}
                                 <li class="active">Wyniki ({{ keyword }})</li>
                                 {% else %}
-                                <li class="active">Wyniki (lokal dla 5-8 osób)</li>
+                                <li class="active">Wyniki (słowo kluczowe)</li>
                                 {% endif %}
                             </ul>
                         </div>
@@ -52,7 +52,7 @@
                             </div>
                             {% endif %}
                             <div class="span4 see-more">
-                                <a href="{% url 'detail' place.slug %}" class="btn btn-large btn-warning">Zobacz lokal <i class="icon-double-angle-right"></i></a>
+                                <a href="{% url 'detail' place.slug %}" title="Lokal {{ place.name }}"class="btn btn-large btn-warning">Zobacz lokal <i class="icon-double-angle-right"></i></a>
                             </div>
                         </div>
                     </div>
