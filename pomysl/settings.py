@@ -125,6 +125,9 @@ COMPRESS_ROOT = PROJECT_DIR + '/../static/'
 COMPRESS_OFFLINE = True
 
 COMPRESS_YUI_BINARY = 'yui-compressor'
+COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar ' + PROJECT_DIR +  '../bin/closure.jar', 
+COMPRESS_CLOSURE_COMPILER_ARGUMENTS = ' --compilation_level SIMPLE_OPTIMIZATIONS'
+
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
@@ -134,8 +137,10 @@ COMPRESS_CSS_FILTERS = [
 
 COMPRESSOR_JS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
-    'compressor.filters.jsmin.JSMinFilter',
+    'compressor.filters.jsmin.SlimItFilter',
     'compressor.filters.yui.YUIJSFilter',
+    'compressor.filters.jsmin.JSMinFilter',
+    'compressor.filters.closure.ClosureCompilerFilter',
 ]
 
 COMPRESS_OUTPUT_DIR = 'min'
