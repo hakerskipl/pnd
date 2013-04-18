@@ -12,7 +12,7 @@
                             <p class="lead">Słowo kluczowe: {{ keyword }}</p>
                             {% endif %}
                             {% if not keyword %}
-                            <h1>Lokale dla 5-8 osób:</h1>
+                            <h1>Chcę {{ tag.desc|lower }}:</h1>
                             {% endif %}
                             <ul class="breadcrumb">
                                 <li><a href="{% url 'index' %}" title="Powrót do strony głównej">Strona główna</a> <span class="divider">/</span></li>
