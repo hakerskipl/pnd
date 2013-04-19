@@ -63,7 +63,7 @@
             <section class="row hello-unit hidden-phone">
                 <div class="span12">
                     <h1>Czas zrobić coś innego!</h1>
-                    <a href="#" class="btn btn-xlarge btn-cta pull-right">Kliknij tu!</a>
+                    <a href="{% url 'cos-nowego' %}" class="btn btn-xlarge btn-cta pull-right">Kliknij tu!</a>
                 </div>
             </section>
             {% block main %}
@@ -73,16 +73,16 @@
                 <div class="span3">
                     <ul class="unstyled">
                         <li class="">
-                            <a href="#">Regulamin serwisu</a>
+                            <a href="{% url 'regulamin' %}">Regulamin serwisu</a>
                         </li>
                         <li class="">
-                            <a href="#">Polityka prywatności</a>
+                            <a href="{% url 'polityka-prywatnosci' %}">Polityka prywatności</a>
                         </li>
                         <li class="">
-                            <a href="#">Kontakt</a>
+                            <a href="{% url 'kontakt' %}">Kontakt</a>
                         </li>
                         <li class="">
-                            <a href="#">Reklama w serwisie</a>
+                            <a href="{% url 'reklama' %}">Reklama w serwisie</a>
                         </li>
                     </ul>
                 </div>
