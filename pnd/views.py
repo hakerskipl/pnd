@@ -33,7 +33,7 @@ def search(request):
         #Szukanie
         form = SearchForm(request.POST)
         if form.is_valid():
-            results = Place.objects.filter(Q(name__contains=form.cleaned_data['szukaj']) | Q(address__contains=form.cleaned_data['szukaj']))
+            results = Place.objects.filter(Q(name__icontains=form.cleaned_data['szukaj']) | Q(address__icontains=form.cleaned_data['szukaj']))
             return render_to_response('wyniki.html', {'allPlaces': results, 'keyword': form.cleaned_data['szukaj']}, context_instance=RequestContext(request))
         else:
             return redirect('index')
