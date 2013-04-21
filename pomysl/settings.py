@@ -122,7 +122,7 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_ROOT = PROJECT_DIR + '/../static/'
 
-# COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = True
 
 COMPRESS_YUI_BINARY = 'yui-compressor'
 COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar ' + PROJECT_DIR +  '../bin/closure.jar', 
