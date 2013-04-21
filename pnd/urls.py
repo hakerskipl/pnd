@@ -3,6 +3,7 @@ from pnd.views import *
 
 urlpatterns = patterns('',
     url(r'^znajdz/$', index, name='index'),
+    url(r'^wsystkie-mozliwosci/$', index, {'all': True}, name='all-tags'),
     url(r'^pokaz/(?P<slug>.+)/$', results, name='results'),
     url(r'^lokal/(?P<slug>.+)/$', detail, name='detail'),
     url(r'^feellucky/$', feelLucky, name='feelLucky'),

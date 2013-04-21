@@ -15,6 +15,18 @@ class PlaceAdmin(admin.ModelAdmin):
 	search_fields = ('name', 'address')
 	filter_horizontal = ('tags',)
 	list_filter = ('tags__name',)
+	fieldsets = (
+        (None, {
+            'fields': ('name', 'short', 'desc', 'tags')
+        }),
+        ('Dane teleadresowe', {
+        	'fields': ('phone', 'website', 'email')
+        	}),
+        ('Godziny otwarcia', {
+            'classes': ('collapse',),
+            'fields': ('mon_hour_open', 'mon_hour_close', 'tue_hour_open', 'tue_hour_close', 'wed_hour_open', 'wed_hour_close', 'thr_hour_open', 'thr_hour_close', 'fri_hour_open', 'fri_hour_close', 'sat_hour_open', 'sat_hour_close', 'sun_hour_open', 'sun_hour_close')
+        })
+    )
 	inlines = [
 		PlaceMenuInline,
 		PlacePhotosInline,
