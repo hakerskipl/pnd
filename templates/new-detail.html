@@ -64,12 +64,16 @@
                     </div>
                     <div class="body">
                         <p>
+                            {% if place.menu.all %}
                             <dl>
                             {% for menu in place.menu.all %}
-                            <dt>{{ menu.name }} ({{ menu.prize }}zł)</dt>
-                            <dd>{{ menu.desc }} </dd>
-                            {% endfor %}
-                        </dl>
+                                <dt>{{ menu.name }} ({{ menu.prize }}zł)</dt>
+                                <dd>{{ menu.desc }} </dd>
+                                {% endfor %}
+                            </dl>
+                            {% else %}
+                            Przepraszamy, ale w tej chwili nie jesteśmy w stanie podać dokładnego menu tego lokalu. Cały czas pracujemy nad zawartością strony i w najbliższym czasie będzie ona funkcjonować w pełni.Zachęcamy do sprawdzania nowości, które sukcesywnie są dodawane.
+                            {% endif %}
                         </p>
                     </div>
                 </div>
