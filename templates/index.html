@@ -9,10 +9,11 @@
                     <ul class="row">
                         {% for tag in tags %}
                         <li class="span4">
-                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search" title="{{ tag.name }} w Toruniu"><div>{{ tag.desc }}</div></a></div>
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
                         </li>
                         {% endfor %}
                     </ul>
+                    <a href="{% url 'all-tags' %}">Pokaż wszystkie opcje</a>
                 </article>
                 <!-- Sidebar z reklamą -->
                 <aside class="span4">
