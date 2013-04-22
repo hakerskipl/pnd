@@ -17,10 +17,10 @@ class PlaceAdmin(admin.ModelAdmin):
 	list_filter = ('tags__name',)
 	fieldsets = (
         (None, {
-            'fields': ('name', 'short', 'desc', 'tags')
+            'fields': ('name', 'desc', 'tags')
         }),
         ('Dane teleadresowe', {
-        	'fields': ('phone', 'website', 'email')
+        	'fields': ('phone', 'website', 'fb', 'email')
         	}),
         ('Godziny otwarcia', {
             'classes': ('collapse',),

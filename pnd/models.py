@@ -9,7 +9,6 @@ from autoslug import AutoSlugField
 class Place(models.Model):
 	name = models.CharField(max_length=150, verbose_name=u'Nazwa lokalu')
 	slug = AutoSlugField(populate_from='name', unique=True, always_update=True, verbose_name=u'Slug')
-	short = models.TextField(null=True, blank=True, verbose_name=u'Krótki opis')
 	desc = models.TextField(null=True, blank=True, verbose_name=u'Opis')
 	address = models.CharField(max_length=200, verbose_name=u'Adres')
 	# Godziny otwarcia
@@ -31,6 +30,7 @@ class Place(models.Model):
 	phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=u'Telefon')
 	email = models.EmailField(null=True, blank=True, verbose_name=u'Email')
 	website = models.URLField(null=True, blank=True, verbose_name=u'Strona www')
+	fb = models.URLField(null=True, blank=True, verbose_name=u'Fanpage (FB)')
 	places_uid = models.TextField(null=True, verbose_name=u'UID Google Places API')
 	tags = models.ManyToManyField('Tags', verbose_name=u'Tagi')
 

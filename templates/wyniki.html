@@ -3,6 +3,7 @@
 {% if keyword %}{{ keyword }}{% endif %}{% if tag %}{{ tag.name }}{% endif %} w Toruniu - Najlepsze restauracje w Pomysł na dziś
 {% endblock %}
 {% block description %}Szukasz dobrego miejsca gdzie można {{ tag.desc }}? Kliknij i zobacz gdzie spędzić dzisiejszy dzień!{% endblock %}
+{% block hero-text %}Czas zrobić coś innego!{% endblock %}
 {% block main %}
             <section class="row main" role="main">
                 <!-- Sekcja główna z wyszukiwarką -->
@@ -45,7 +46,7 @@
                                 <div class="span8 tags">
                                     <ul class="inline">
                                         {% for tag in place.tags.all %}
-                                        <li>{{ tag.name }}</li>
+                                        <li><i class="icon-tags"></i> {{ tag.name }}</li>
                                         {% endfor %}
                                     </ul>
                                 </div>
