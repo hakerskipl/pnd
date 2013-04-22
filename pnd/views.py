@@ -5,6 +5,7 @@ from django.db.models import Q
 from django.utils import simplejson as json
 from django.http import HttpResponse
 from django.views.generic import TemplateView
+from django.db.models import Count
 from datetime import date
 import random
 from pnd.models import *
@@ -17,7 +18,7 @@ def index(request, all=False):
     except:
         todaysIdea = None
     if all:
-        tags = Tags.objects.all()
+        tags = Tags.objects.annotate(num_places=Count('place__id')).order_by('-num_places')
     else:
         tags = Tags.objects.filter(home=True)
     return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags}, context_instance=RequestContext(request))
@@ -29,7 +30,7 @@ def results(request, slug):
 
 def detail(request, slug):
     placeData = Place.objects.get(slug=slug)
-    return render_to_response('detail.html', {'place': placeData}, context_instance=RequestContext(request))
+    return render_to_response('new-detail.html', {'place': placeData}, context_instance=RequestContext(request))
 
 def search(request):
     if request.method == 'POST':

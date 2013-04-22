@@ -139,8 +139,19 @@ section.main {
     }
   }
 
+  aside {
+    background-color: #ddd;
+    margin-bottom: -99999px;
+    padding-bottom: 99999px;
+
+    .kontener {
+      padding: 0px 10px 10px 10px;
+    }
+  }
+
   // SERPs page stylings
   article.serp {
+
     div.result {
       background-color: #fff;
 
@@ -175,43 +186,86 @@ section.main {
       padding: 5px 20px 10px 20px;
     }
   }
+}
 
-  // Deatil page stylings
-  article.information {
-    a > img {
-      padding: 5px;
-      .border-radius(10px);
-    }
+// Deatil page stylings
+article.detail {
+  a > img {
+    padding: 5px;
+    .border-radius(10px);
   }
 
-  aside.details {
-    .fontStyle1();
+  .fontStyle1();
 
-    & > div {
-      margin: 10px 5px 15px 5px;
-      font-size: 1.2em;
+  background-color: #F0F2EB;
+}
 
-      & > span {
-        display: block;
-        font-size: 1.2em;
-        font-weight: bold;
-        margin: 4px 0px;
-      }
-    }
+div.block {
+  // &:nth-child(odd) {
+  //   margin: 10px 5px 10px 15px;
+  // }
 
-    & > div:first-child {
-      margin-top: 5px;
-    }
+  // &:nth-child(even) {
+  //   margin: 10px 15px 10px 5px;
+  // }
+
+  margin: 10px;
+
+  &.double {
+    width: 930px;
   }
 
-  aside {
-    background-color: #ddd;
-    margin-bottom: -99999px;
-    padding-bottom: 99999px;
+  div.body {
+    background-color: #fff;
+    padding: 10px;
+  }
 
-    .kontener {
-      padding: 0px 10px 10px 10px;
-    }
+  div.head {
+    overflow: hidden;
+  }
+
+  div.head > h3 {
+    margin: 5px 10px;
+  }
+
+  .head.one {
+    background-color: #69D2E7;
+    color: #fff;
+  }
+
+  .head.two {
+    background-color: #FAD3B2;
+  }
+
+  .head.three {
+    background-color: #C7F464;
+  }
+
+  .head.four {
+    background-color: #60B99A;
+    color: #fff;
+  }
+
+  .head.five {
+    background-color: #F02311;
+    color: #fff;
+  }
+
+  .head.six {
+    background-color: #FBB829;
+  }
+
+  .head.seven {
+    background-color: #F0F0D8;
+  }
+
+  .head.eight {
+    background-color: #DFECE6;
+  }
+
+  .head.nine {
+    background-color: #36544f;
+    color: #fff;
   }
 }
 
@@ -281,6 +335,10 @@ footer {
     background-image: url('{{STATIC_URL}}img/background_1024.jpg');
     background-position: center top;
     -webkit-background-size: 2650px 1440px;
+  }
+
+  div.block.double {
+    width: 714px;
   }
 }
 

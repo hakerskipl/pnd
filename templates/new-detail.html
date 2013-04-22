@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block title %}Lokal {{ place.name }} - informacje, zdjęcia, komentarze, menu - Pomysł na dziś :: Toruń{% endblock %}
+{% block description %}Byłeś już w {{ place.name }}? Zobacz więcej informacji o tym miejscu. Sprawdź menu, zdjęcia i komentarze innych.{% endblock %}
+{% block hero-text %}Czas zrobić coś innego!{% endblock %}
+{% load compress %}
+{% block main %}
+            <article class="row main detail" role="main">
+                <!-- Base -->
+                <div class="block span6">
+                    <div class="head one">
+                        <h3>Lokal {{ place.name }}</h3>
+                    </div>
+                    <div class="body">
+                        <p>{{ place.address }}</p>
+                        <p>{{ place.email }}</p>
+                        <p>{{ place.phone }}</p>
+                        <p>{{ place.website }}</p>
+                        <p>{{ place.fb }}</p>
+                    </div>
+                </div>
+                <!-- O lokalu -->
+                <div class="block span6">
+                    <div class="head two">
+                        <h3>O lokalu</h3>
+                    </div>
+                    <div class="body">
+                        <p>{{ place.desc }}</p>
+                    </div>
+                </div>
+                <!-- Chmura tagów -->
+                <div class="block span6">
+                    <div class="head three">
+                        <h3>Chmura tagów</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <ul class="inline">
+                                {% for tag in place.tags.all %}
+                                <li><i class="icon-tags"></i> {{ tag.name }}</li>
+                                {% endfor %}
+                            </ul>
+                        </p>
+                    </div>
+                </div>
+                <!-- Godziny otwarcia -->
+                <div class="block span6">
+                    <div class="head four">
+                        <h3>Godziny otwarcia</h3>
+                    </div>
+                    <div class="body">
+                        <p>Poniedziałek: {{ place.mon_hour_open }} - {{ place.mon_hour_close }}</p>
+                        <p>Wtorek: {{ place.tue_hour_open }} - {{ place.tue_hour_close }}</p>
+                        <p>Środa: {{ place.wed_hour_open }} - {{ place.wed_hour_close }}</p>
+                        <p>Czwartek: {{ place.thr_hour_open }} - {{ place.thr_hour_close }}</p>
+                        <p>Piątek: {{ place.fri_hour_open }} - {{ place.fri_hour_close }}</p>
+                        <p>Sobota: {{ place.sat_hour_open }} - {{ place.sat_hour_close }}</p>
+                        <p>Niedziela: {{ place.sun_hour_open }} - {{ place.sun_hour_close }}</p>
+                    </div>
+                </div>
+                <!-- Stoliki -->
+                <div class="block span6">
+                    <div class="head five">
+                        <h3>Menu</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <dl>
+                            {% for menu in place.menu.all %}
+                            <dt>{{ menu.name }} ({{ menu.prize }}zł)</dt>
+                            <dd>{{ menu.desc }} </dd>
+                            {% endfor %}
+                        </dl>
+                        </p>
+                    </div>
+                </div>
+                <!-- Zdjęcia -->
+                <div class="block span6">
+                    <div class="head six">
+                        <h3>Komentarze</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <div class="fb-comments" data-href="{% url 'detail' place.id %}" data-num-posts="10"></div>
+                        </p>
+                    </div>
+                </div>
+                <!-- Menu -->
+                <div class="block span6">
+                    <div class="head seven">
+                        <h3>Stoliki</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            {% if place.tables.all %}
+                            {% for table in place.tables.all %}
+                            <span>{{ table.quantity }}x Stolik {{ table.get_table_display }}</span>
+                            {% endfor %}
+                            {% endif %}
+                        </p>
+                    </div>
+                </div>
+                <!-- Komentarze -->
+                <div class="block span6">
+                    <div class="head eight">
+                        <h3>Zdjęcia lokalu</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            {% for img in place.photos.all %}
+                            <a href="/{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="{{ img.desc }}" title="Zdjęcie lokalu {{ place.name }}"><img src="/{{ img.photo_thumbnail }}"></a>
+                            {% endfor %}
+                        </p>
+                    </div>
+                </div>
+                <!-- Mapka -->
+                <div class="block span12 double">
+                    <div class="head nine">
+                        <h3>Lokalizacja</h3>
+                    </div>
+                    <div class="body">
+                        <div id="map" style="height: 350px;"></div>
+                    </div>
+                </div>
+            </article>
+{% endblock %}
+{% block js-nc %}
+<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+{% endblock %}
+{% block js-comp %}
+
+{% compress js %}
+<script src="{{STATIC_URL}}js/fresco.js"></script>  
+<script src="{{STATIC_URL}}js/gmaps.js"></script>
+<script src="{{STATIC_URL}}js/main.js"></script>
+{% endcompress %}
+
+<script>
+map = new GMaps({
+  div: '#map',
+  lat: 53.01379,
+  lng: 18.59844,
+  panControl: false,
+  zoomControl: false,
+  mapTypeControl: false,
+  scaleControl: false,
+  streetViewControl: false,
+  overviewMapControl: false
+});
+GMaps.geocode({
+  address: "{{ place.address }}",
+  callback: function(results, status) {
+    if (status == 'OK') {
+      var latlng = results[0].geometry.location;
+      map.setCenter(latlng.lat(), latlng.lng());
+      map.addMarker({
+        lat: latlng.lat(),
+        lng: latlng.lng()
+      });
+    }
+  }
+});
+</script>
+
+
+{% endblock %}
