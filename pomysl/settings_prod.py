@@ -1,4 +1,4 @@
-# Django settings for pomysl project.
+#-*- coding: utf-8 -*-
 import os
 PROJECT_DIR = os.path.dirname(__file__)
 
@@ -152,6 +152,8 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+GRAPPELLI_ADMIN_TITLE = u'Pomysł na dziś'
 
 TEMPLATE_DIRS = (
     # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
