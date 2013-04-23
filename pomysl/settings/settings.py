@@ -2,8 +2,7 @@
 import os
 PROJECT_DIR = os.path.dirname(__file__)
 
-DEBUG = False
-TEMPLATE_DEBUG = True
+DEBUG = TEMPLATE_DEBUG = True
 
 ADMINS = (
     ('Hakerski', 'mateusz@pomyslnadzis.pl'),
@@ -25,7 +24,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['']
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -123,7 +122,7 @@ COMPRESS_PRECOMPILERS = (
 
 COMPRESS_ROOT = PROJECT_DIR + '/../static/'
 
-COMPRESS_OFFLINE = True
+COMPRESS_OFFLINE = False
 
 COMPRESS_YUI_BINARY = 'yui-compressor'
 COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar ' + PROJECT_DIR +  '../bin/closure.jar', 
