@@ -57,7 +57,7 @@
                         <p>Niedziela: {{ place.sun_hour_open }} - {{ place.sun_hour_close }}</p>
                     </div>
                 </div>
-                <!-- Stoliki -->
+                <!-- Menu -->
                 <div class="block span6">
                     <div class="head five">
                         <h3>Menu</h3>
@@ -77,33 +77,31 @@
                         </p>
                     </div>
                 </div>
-                <!-- Zdjęcia -->
+                <!-- Komentarze -->
                 <div class="block span6">
                     <div class="head six">
                         <h3>Komentarze</h3>
                     </div>
                     <div class="body">
                         <p>
-                            <div class="fb-comments" data-href="{% url 'detail' place.id %}" data-num-posts="10"></div>
+                            <div class="fb-comments" data-href="{% url 'detail' place.slug %}" data-num-posts="10"></div>
                         </p>
                     </div>
                 </div>
-                <!-- Menu -->
+                <!-- Stoliki -->
                 <div class="block span6">
                     <div class="head seven">
                         <h3>Stoliki</h3>
                     </div>
                     <div class="body">
                         <p>
-                            {% if place.tables.all %}
                             {% for table in place.tables.all %}
                             <span>{{ table.quantity }}x Stolik {{ table.get_table_display }}</span>
                             {% endfor %}
-                            {% endif %}
                         </p>
                     </div>
                 </div>
-                <!-- Komentarze -->
+                <!-- Zdjęcia -->
                 <div class="block span6">
                     <div class="head eight">
                         <h3>Zdjęcia lokalu</h3>

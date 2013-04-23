@@ -9,8 +9,12 @@
                     <h2>Co chcesz zrobić na mieście?</h2>
                     <ul class="row">
                         {% for tag in tags %}
+                        {% if tag.num_places <= 5 and not home %}
+                        <li class="span2 small-tags">
+                        {% else %}
                         <li class="span4">
-                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn {% if not home %}{% if tag.num_places > 5 %}btn-xlarge{% endif %}{% else %}btn-xlarge{% endif %} btn-block {% if tag.home %}btn-search{% else %}btn-info{% endif %}" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
+                        {% endif %}
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn {% if not home %}{% if tag.num_places > 5 %}btn-xlarge{% endif %}{% else %}btn-xlarge{% endif %} btn-block {% if not home %}{% if tag.num_places > 5 %}btn-search{% else %}btn-info{% endif %}{% else %}btn-search{% endif %}" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
                         </li>
                         {% endfor %}
                     </ul>
