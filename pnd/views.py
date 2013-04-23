@@ -17,11 +17,13 @@ def index(request, home=False):
         todaysIdea = TodaysIdea.objects.get(date__exact=today)
     except:
         todaysIdea = None
+    tagsHome = Tags.objects.filter(home=True)
+    tagsExtra = None
+    tagsLess = None
     if home:
-        tags = Tags.objects.annotate(num_places=Count('place__id')).order_by('-num_places')
-    else:
-        tags = Tags.objects.filter(home=True)
-    return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags, 'home':not home}, context_instance=RequestContext(request))
+        tagsExtra = Tags.objects.exclude(home=True).annotate(num_places=Count('place__id')).filter(num_places__gt=5).order_by('-num_places')
+        tagsLess = Tags.objects.exclude(home=True).annotate(num_places=Count('place__id')).filter(num_places__lte=5).order_by('-num_places')
+    return render_to_response('index.html', {'idea':todaysIdea, 'tags':tagsHome, 'tagsExtra': tagsExtra, 'tagsLess': tagsLess, 'home':not home}, context_instance=RequestContext(request))
 
 def results(request, slug):
     tag = Tags.objects.get(slug__exact=slug)
