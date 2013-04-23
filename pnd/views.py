@@ -11,17 +11,17 @@ import random
 from pnd.models import *
 from pnd.forms import *
 
-def index(request, all=False):
+def index(request, home=False):
     today = date.today()
     try:
         todaysIdea = TodaysIdea.objects.get(date__exact=today)
     except:
         todaysIdea = None
-    if all:
+    if home:
         tags = Tags.objects.annotate(num_places=Count('place__id')).order_by('-num_places')
     else:
         tags = Tags.objects.filter(home=True)
-    return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags}, context_instance=RequestContext(request))
+    return render_to_response('index.html', {'idea':todaysIdea, 'tags':tags, 'home':not home}, context_instance=RequestContext(request))
 
 def results(request, slug):
     tag = Tags.objects.get(slug__exact=slug)
