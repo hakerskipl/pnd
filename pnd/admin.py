@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 from django.contrib import admin
+from django.db.models import Count
 from pnd.models import *
 
 class PlacePhotosInline(admin.TabularInline):
@@ -33,8 +34,17 @@ class PlaceAdmin(admin.ModelAdmin):
 	]
 
 class TagsAdmin(admin.ModelAdmin):
-	list_display = ('name',)
+	list_display = ('name', 'num_places_count')
 	search_fields = ('name',)
+
+	def queryset(self, request):
+		qs = super(TagsAdmin, self).queryset(request)
+		return qs.annotate(num_places=Count('place__id'))
+
+	def num_places_count(self, obj):
+		return obj.num_places
+	num_places_count.short_description = 'Ilość lokali'
+	num_places_count.admin_order_field = 'num_places'
 
 class PlacePhotosAdmin(admin.ModelAdmin):
 	list_display = ('place', 'photo')
