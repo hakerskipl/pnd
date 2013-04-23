@@ -15,14 +15,7 @@ COMPRESS_PRECOMPILERS = (
     ('text/less', 'lessc {infile} {outfile}'),
 )
 
-COMPRESS_ROOT = PROJECT_DIR + '/../static/'
-
 COMPRESS_OFFLINE = True
-
-COMPRESS_YUI_BINARY = 'yui-compressor'
-COMPRESS_CLOSURE_COMPILER_BINARY = 'java -jar ' + PROJECT_DIR +  '../bin/closure.jar', 
-COMPRESS_CLOSURE_COMPILER_ARGUMENTS = ' --compilation_level SIMPLE_OPTIMIZATIONS'
-
 
 COMPRESS_CSS_FILTERS = [
     'compressor.filters.template.TemplateFilter',
