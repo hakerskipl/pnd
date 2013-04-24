@@ -1,4 +1,4 @@
-# Django settings for pomysl project.
+#-*- coding: utf-8 -*-
 from common import *
 
 DEBUG = False
@@ -41,3 +41,5 @@ CACHES = {
         'LOCATION': '127.0.0.1:11211',
     }
 }
+
+GRAPPELLI_ADMIN_TITLE = u'Pomysł na dziś'
