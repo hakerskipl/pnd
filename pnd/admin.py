@@ -32,6 +32,11 @@ class PlaceAdmin(admin.ModelAdmin):
 		PlaceMenuInline,
 		PlacePhotosInline,
 	]
+	class Media:
+		js = [
+			'/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+			'/static/js/tinymce.init.js',
+		]
 
 class TagsAdmin(admin.ModelAdmin):
 	list_display = ('name', 'num_places_count')

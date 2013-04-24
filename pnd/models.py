@@ -1,5 +1,6 @@
 #-*- coding: utf-8 -*-
 from django.db import models
+from django.core.urlresolvers import reverse
 from datetime import date
 from imagekit.models import ProcessedImageField
 from imagekit.processors import ResizeToFill
@@ -37,6 +38,9 @@ class Place(models.Model):
 	def __unicode__(self):
 		return u'Lokal ' + self.name
 
+	def get_absolute_url(self):
+		return reverse('pnd.views.detail', args=[str(self.slug)])
+
 	class Meta:
 		verbose_name = u'Lokal'
 		verbose_name_plural = u'Lokale'
@@ -52,6 +56,9 @@ class Tags(models.Model):
 
 	def __unicode__(self):
 		return u'Tag ' + self.name
+
+	def get_absolute_url(self):
+		return reverse('pnd.views.results', args=[str(self.slug)])
 
 	class Meta:
 		verbose_name = u'Tag'

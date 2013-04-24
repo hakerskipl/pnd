@@ -169,6 +169,7 @@ INSTALLED_APPS = (
     'django.contrib.flatpages',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',
     # Uncomment the next line to enable the admin:
     'grappelli'
 ,    'django.contrib.admin',
