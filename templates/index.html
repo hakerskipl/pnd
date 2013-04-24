@@ -8,13 +8,24 @@
                 <article class="span8">
                     <h2>Co chcesz zrobić na mieście?</h2>
                     <ul class="row">
+                        <!-- Tagi podstawowe -->
                         {% for tag in tags %}
-                        {% if tag.num_places <= 5 and not home %}
-                        <li class="span2 small-tags">
-                        {% else %}
                         <li class="span4">
-                        {% endif %}
-                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn {% if not home %}{% if tag.num_places > 5 %}btn-xlarge{% endif %}{% else %}btn-xlarge{% endif %} btn-block {% if not home %}{% if tag.num_places > 5 %}btn-search{% else %}btn-info{% endif %}{% else %}btn-search{% endif %}" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search btn-tags" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
+                        </li>
+                        {% endfor %}
+                        <!-- Tagi extra -->
+                        {% for tag in tagsExtra %}
+                        <li class="span4">
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-xlarge btn-block btn-search btn-tags" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                    <ul class="row">
+                        <!-- Tagi less -->
+                        {% for tag in tagsLess %}
+                        <li class="span2 small-tags">
+                            <div class="search-container"><a href="{% url 'results' tag.slug %}" class="btn btn-block btn-info btn-tags" title="{{ tag.name }} w Toruniu"><div>{% if tag.desc %}{{ tag.desc }} {% else %} {{ tag.name }} {% endif %}</div></a></div>
                         </li>
                         {% endfor %}
                     </ul>
