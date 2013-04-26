@@ -12,6 +12,7 @@ class Place(models.Model):
 	slug = AutoSlugField(populate_from='name', unique=True, always_update=True, verbose_name=u'Slug')
 	desc = models.TextField(null=True, blank=True, verbose_name=u'Opis')
 	address = models.CharField(max_length=200, verbose_name=u'Adres')
+	tags = models.ManyToManyField('Tags', verbose_name=u'Tagi')
 	# Godziny otwarcia
 	mon_hour_open = models.TimeField(null=True, blank=True, verbose_name=u'Godzina otwarcia (Pon)')
 	mon_hour_close = models.TimeField(null=True, blank=True, verbose_name=u'Godzina zamknięcia (Pon)')
@@ -27,13 +28,14 @@ class Place(models.Model):
 	sat_hour_close = models.TimeField(null=True, blank=True, verbose_name=u'Godzina zamknięcia (Sob)')
 	sun_hour_open = models.TimeField(null=True, blank=True, verbose_name=u'Godzina otwarcia (Nie)')
 	sun_hour_close = models.TimeField(null=True, blank=True, verbose_name=u'Godzina zamknięcia (Nie)')
-	# Koniec godzin otwarcia
+	# Kontakty
 	phone = models.CharField(max_length=20, blank=True, null=True, verbose_name=u'Telefon')
 	email = models.EmailField(null=True, blank=True, verbose_name=u'Email')
 	website = models.URLField(null=True, blank=True, verbose_name=u'Strona www')
 	fb = models.URLField(null=True, blank=True, verbose_name=u'Fanpage (FB)')
+	# Inne 
 	places_uid = models.TextField(null=True, verbose_name=u'UID Google Places API')
-	tags = models.ManyToManyField('Tags', verbose_name=u'Tagi')
+	grammar = models.CharField(max_length=150, default=u'Lokal', null=True, blank=True, verbose_name=u'Inna nazwa (nie lokal tylko)')
 
 	def __unicode__(self):
 		return u'Lokal ' + self.name

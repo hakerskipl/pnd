@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}Lokal {{ place.name }} - informacje, zdjęcia, komentarze, menu - Pomysł na dziś :: Toruń{% endblock %}
+{% block title %}{{ grammar|capfirst }} {{ place.name }} - informacje, zdjęcia, komentarze, menu - Pomysł na dziś :: Toruń{% endblock %}
 {% block description %}Byłeś już w {{ place.name }}? Zobacz więcej informacji o tym miejscu. Sprawdź menu, zdjęcia i komentarze innych.{% endblock %}
 {% block hero-text %}Czas zrobić coś innego!{% endblock %}
 {% load compress %}
@@ -8,7 +8,7 @@
                 <!-- Base -->
                 <div class="block span6">
                     <div class="head one">
-                        <h3>Lokal {{ place.name }}</h3>
+                        <h3>{{ grammar|capfirst }} {{ place.name }}</h3>
                     </div>
                     <div class="body">
                         <p>{{ place.address }}</p>
