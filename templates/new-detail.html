@@ -109,7 +109,7 @@
                     <div class="body">
                         <p>
                             {% for img in place.photos.all %}
-                            <a href="/{{ img.photo }}" class="fresco" data-fresco-group="gallery" data-fresco-caption="{{ img.desc }}" title="Zdjęcie lokalu {{ place.name }}"><img src="/{{ img.photo_thumbnail }}"></a>
+                            <a href="/{{ img.photo }}" class="swipebox" title="{{ img.desc }}"><img src="/{{ img.photo_thumbnail }}" alt="Zdjęcie lokalu {{ place.name }}"></a>
                             {% endfor %}
                         </p>
                     </div>
@@ -131,7 +131,8 @@
 {% block js-comp %}
 
 {% compress js %}
-<script src="{{STATIC_URL}}js/fresco.js"></script>  
+<script src="{{STATIC_URL}}js/ios-orientationchange-fix.js"></script>  
+<script src="{{STATIC_URL}}js/jquery.swipebox.min.js"></script>  
 <script src="{{STATIC_URL}}js/gmaps.js"></script>
 <script src="{{STATIC_URL}}js/main.js"></script>
 {% endcompress %}
