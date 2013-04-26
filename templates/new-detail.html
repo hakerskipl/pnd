@@ -109,7 +109,7 @@
                     <div class="body">
                         <p>
                             {% for img in place.photos.all %}
-                            <a href="/{{ img.photo }}" class="swipebox" title="{% if img.desc %}{{ img.desc }}{% else %}{{ place.grammar|capfirst }} {{ place.name }}"><img src="/{{ img.photo_thumbnail }}" alt="Zdjęcie lokalu {{ place.name }}"></a>
+                            <a href="/{{ img.photo }}" class="swipebox" title="{% if img.desc %}{{ img.desc }}{% else %}{{ place.grammar|capfirst }} {{ place.name }}{% endif %}"><img src="/{{ img.photo_thumbnail }}" alt="Zdjęcie lokalu {{ place.name }}"></a>
                             {% endfor %}
                         </p>
                     </div>
