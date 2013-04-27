@@ -39,7 +39,7 @@ class PlaceAdmin(admin.ModelAdmin):
 		]
 
 class TagsAdmin(admin.ModelAdmin):
-	list_display = ('name', 'num_places_count')
+	list_display = ('name', 'num_places_count', 'icon')
 	search_fields = ('name',)
 
 	def queryset(self, request):

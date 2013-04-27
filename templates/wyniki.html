@@ -46,7 +46,7 @@
                                 <div class="span8 tags">
                                     <ul class="inline">
                                         {% for tag in place.tags.all %}
-                                        <li>{% if tag.icon %}<img src="{{STATIC_URL}}/img/icons/{{ tag.icon}}.png" class="tag-icon" alt="{{ tag.name }}">{% else %}<i class="icon-tags"></i>{% endif %} {{ tag.name }}</li>
+                                        <li>{% if tag.icon %}<img src="{{STATIC_URL}}img/icons/{{ tag.icon}}.png" class="tag-icon" alt="{{ tag.name }}">{% else %}<i class="icon-tags"></i>{% endif %} {{ tag.name }}</li>
                                         {% endfor %}
                                     </ul>
                                 </div>
