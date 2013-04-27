@@ -77,17 +77,6 @@
                         </p>
                     </div>
                 </div>
-                <!-- Komentarze -->
-                <div class="block span6">
-                    <div class="head six">
-                        <h3>Komentarze</h3>
-                    </div>
-                    <div class="body">
-                        <p>
-                            <div class="fb-comments" data-href="{% url 'detail' place.slug %}" data-num-posts="10"></div>
-                        </p>
-                    </div>
-                </div>
                 <!-- Stoliki -->
                 <div class="block span6">
                     <div class="head seven">
@@ -111,6 +100,17 @@
                             {% for img in place.photos.all %}
                             <a href="/{{ img.photo }}" class="swipebox" title="{% if img.desc %}{{ img.desc }}{% else %}{{ place.grammar|capfirst }} {{ place.name }}{% endif %}"><img src="/{{ img.photo_thumbnail }}" alt="Zdjęcie lokalu {{ place.name }}"></a>
                             {% endfor %}
+                        </p>
+                    </div>
+                </div>
+                <!-- Komentarze -->
+                <div class="block span6">
+                    <div class="head six">
+                        <h3>Komentarze</h3>
+                    </div>
+                    <div class="body">
+                        <p>
+                            <div class="fb-comments" data-href="{% url 'detail' place.slug %}" data-num-posts="10"></div>
                         </p>
                     </div>
                 </div>
