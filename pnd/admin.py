@@ -71,3 +71,17 @@ admin.site.register(Tags, TagsAdmin)
 admin.site.register(PlacePhotos, PlacePhotosAdmin)
 admin.site.register(PlaceMenu, PlaceMenuAdmin)
 admin.site.register(TodaysIdea, TodaysIdeaAdmin)
+
+from django.contrib.flatpages.models import FlatPage
+from django.contrib.flatpages.admin import FlatPageAdmin
+#Flatpages
+class FlatPageAdmin(FlatPageAdmin):
+	class Media:
+		js = [
+			'/static/grappelli/tinymce/jscripts/tiny_mce/tiny_mce.js',
+			'/static/js/tinymce.init.js',
+		]
+
+# We have to unregister it, and then reregister
+admin.site.unregister(FlatPage)
+admin.site.register(FlatPage, FlatPageAdmin)
