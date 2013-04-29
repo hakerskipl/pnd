@@ -53,17 +53,8 @@ def feelLucky(request):
     place = Place.objects.get(pk=random_index)
     return redirect('detail', place.slug)
 
-def typeahead(request, search):
-   # if search == '':
-    data = Place.objects.only('name')
-    #else:
-    #    data = Place.objects.filter(name__contains=search).only('name')
-    json_data = []
-    for place in data:
-        json_data.append(place.name)
-    
-    response = json.dumps(json_data)
-    return HttpResponse(response, mimetype="application/json")
+def helpUs(request):
+    return render_to_response('help-us.html', context_instance=RequestContext(request))
 
 class Error404(TemplateView):
     template_name = "404.html"

@@ -287,6 +287,53 @@ div.block {
   }
 }
 
+// Join the revolution
+.helper {
+  h3 {
+    margin: 0px;
+  }
+
+  .heads {
+    border-top: 1px solid #999;
+    background-color: #eee;
+  }
+
+  .heads.first {
+    border-top: 0px;
+  }
+
+  .heads.active {
+    border-bottom: 1px solid #999;
+  }
+
+  div.span10.heads { 
+    margin-left: 0px;
+  }
+
+  div.content {
+    margin-left: 160px;
+  }
+
+  p {
+    margin: 5px 0px 3px 0px;
+  }
+}
+
+div.step {
+  font-size: 24px;
+  .border-radius(50%);
+  width: 48px;
+  height: 32px;
+  padding-top: 16px;
+  text-align: center;
+  background-color: red;
+  color: white;
+  display: block;
+  margin: 10px 30px 10px auto;
+}
+
+
+
 footer {
   background-color: #333;
   padding-top: 10px;
@@ -359,6 +406,10 @@ footer {
 @media (min-width: 768px) and (max-width: 979px) {
   div.block.double {
     width: 724px;
+  }
+
+  div.span10.content {
+    margin-left: 128px;
   }
 }
 

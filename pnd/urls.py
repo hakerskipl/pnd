@@ -9,7 +9,8 @@ urlpatterns = patterns('',
     url(r'^feellucky/$', feelLucky, name='feelLucky'),
 
     url(r'^szukaj/$', search, name='search'),
-    url(r'^typeahead/(?P<search>\w+)/$', typeahead, name='typeahead'),
+
+    url(r'^wspomoz-rewolucje/$', helpUs, name='help-us'),
 
     url(r'^404/$', Error404, name='404'),
     url(r'^500/$', Error500, name='500'),
