@@ -294,16 +294,46 @@ div.block {
   }
 
   .heads {
-    border-top: 1px solid #999;
-    background-color: #eee;
+    border-bottom: 1px solid #92c4f8;
+    background-color: #daebfd;
+
+    & > .step {
+      background-color: #92c4f8;
+    }
   }
 
-  .heads.first {
-    border-top: 0px;
+  .heads.next {
+    border-top: 1px solid #92c4f8;
+
+    &.success {
+      border-top: 1px solid #76c511;
+    }
+
+    &.active {
+      border-top: 1px solid #d28000;
+    }
   }
 
   .heads.active {
-    border-bottom: 1px solid #999;
+    border-bottom: 1px solid #d28000;
+    background-color: #ffa311;
+
+    & > .step {
+      background-color: #d28000;
+    }
+  }
+
+  .heads.success {
+    border-bottom: 1px solid #76c511;
+    background-color: #aff15b;
+
+    &.first {
+      border-bottom: 1px solid #76c511;
+    }
+
+    & > .step {
+      background-color: #76c511;
+    }
   }
 
   div.span10.heads { 
@@ -315,7 +345,7 @@ div.block {
   }
 
   p {
-    margin: 5px 0px 3px 0px;
+    margin: 2px 0px 6px 0px;
   }
 }
 
