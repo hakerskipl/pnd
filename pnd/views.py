@@ -56,6 +56,23 @@ def feelLucky(request):
 def helpUs(request):
     return render_to_response('help-us.html', context_instance=RequestContext(request))
 
+def newsletterSignUp(request):
+    if request.method == 'POST':
+        form = NewsletterForm(request.POST)
+        if form.is_valid():
+            signUp = Newsletter(imie=form.cleaned_data['imie'], email=form.cleaned_data['email'])
+            signUp.save()
+            # TODO: add AJAX header
+            return HttpResponse('1')
+        else:
+            # TODO: Send back JSON answer
+            # TODO: add AJAX header
+            return HttpResponse('2')
+    else:
+        # TODO: add AJAX header
+        return HttpResponse('0')
+
+
 class Error404(TemplateView):
     template_name = "404.html"
 
