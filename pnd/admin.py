@@ -66,11 +66,16 @@ class TodaysIdeaAdmin(admin.ModelAdmin):
 	search_fields = ('place__name',)
 	ordering = ['-date']
 
+class NewsletterAdmin(admin.ModelAdmin):
+	list_display = ('imie', 'email',)
+	search_fields = ('email',)
+
 admin.site.register(Place, PlaceAdmin)
 admin.site.register(Tags, TagsAdmin)
 admin.site.register(PlacePhotos, PlacePhotosAdmin)
 admin.site.register(PlaceMenu, PlaceMenuAdmin)
 admin.site.register(TodaysIdea, TodaysIdeaAdmin)
+admin.site.register(Newsletter, NewsletterAdmin)
 
 from django.contrib.flatpages.models import FlatPage
 from django.contrib.flatpages.admin import FlatPageAdmin

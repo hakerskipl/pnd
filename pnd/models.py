@@ -127,3 +127,15 @@ class TodaysIdea(models.Model):
 		verbose_name = u'Nasz pomysł'
 		verbose_name_plural = u'Nasze pomysły'
 		ordering = ['-date']
+
+class Newsletter(models.Model):
+	email = models.EmailField(verbose_name=u'Email')
+	imie = models.CharField(max_length=150, verbose_name=u'Imię')
+
+	def __unicode__(self):
+		return self.email
+
+	class Meta:
+		verbose_name = u'Zapisany na newsletter'
+		verbose_name_plural = u'Zapisani na newsletter'
+
