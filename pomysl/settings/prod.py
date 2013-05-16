@@ -1,7 +1,7 @@
 #-*- coding: utf-8 -*-
 from common import *
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']

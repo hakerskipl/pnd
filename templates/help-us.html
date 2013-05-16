@@ -19,12 +19,29 @@
 	            		</div>
 	            		<div class="span10 offset2 content hidden">
 	            			<blockquote>
-								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-		            			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-		            			quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-		            			consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-		            			cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-		            			proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+								<form class="form-horizontal" method="POST" id="newsletter-singup" action="{% url 'newsletter-signup' %}">{% csrf_token %}
+								  <div class="control-group">
+								    <label class="control-label" for="inputName">Imię</label>
+								    <div class="controls">
+								      <input type="text" id="inputName" name="imie" placeholder="Imię">
+								    </div>
+								  </div>
+								  <div class="control-group">
+								    <label class="control-label" for="inputEmail">Email</label>
+								    <div class="controls">
+								      <input type="text" id="inputEmail" name="email" placeholder="Email">
+								    </div>
+								  </div>
+								  
+								  <div class="control-group">
+								    <div class="controls">
+								      <label class="checkbox">
+								        <input type="checkbox"> Zapoznałem się z <a href="{% url 'polityka-prywatnosci' %}">Polityką Prywatności</a> i akceptuje ją
+								      </label>
+								      <button type="submit" class="btn">Zapisz się!</button>
+								    </div>
+								  </div>
+								</form>
 							</blockquote>
 	            		</div>
 	            	</div>
@@ -110,6 +127,47 @@
 {% block js-comp %}
 {% load compress %}
 {% compress js %}
-<script src="{{STATIC_URL}}js/help-us.js"></script>  
+<script type="text/javascript">
+$(document).ready(function(){
+	var activeHelper = $('.active').first().parents('.row.helper');
+	console.log(activeHelper);
+	$('.row.helper').on('showtime', function(){
+		var sib = $(this).siblings();
+		sib.find('.content').addClass('hidden');
+		sib.find('.active').removeClass('active');
+		sib.find('.heads').removeClass('next');
+		$(this).find('.content').removeClass('hidden');
+		$(this).find('.heads').addClass('active').removeClass('next');
+		$(this).next().find('.heads').addClass('next');
+		// console.log($(this).find('.content'));
+	});
+	$('.row.helper').on('click', function(){
+		$(this).trigger('showtime');
+	});
+	$('#newsletter-singup').submit(function(event){
+		event.preventDefault();
+		// console.log( $(this).serializeArray() );
+		$.ajax({
+			url: $(this).attr('action'),
+			type: 'POST',
+			data: $(this).serialize(),
+			dataType: 'json'
+		}).done(function(data) {
+			// Bład wysyłki
+			if (data.answer == 0) {
+				alert('0');
+			}
+			// Sukces
+			if (data.answer == 1) {
+				alert('1');
+			}
+			// Źle wypełniony formularz
+			if (data.answer == 2) {
+				alert('2');
+			}
+		});
+	});
+});
+</script>
 {% endcompress %}
 {% endblock %}

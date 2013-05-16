@@ -62,15 +62,11 @@ def newsletterSignUp(request):
         if form.is_valid():
             signUp = Newsletter(imie=form.cleaned_data['imie'], email=form.cleaned_data['email'])
             signUp.save()
-            # TODO: add AJAX header
-            return HttpResponse('1')
+            return HttpResponse(json.dumps({'answer':1}), mimetype="application/json")
         else:
-            # TODO: Send back JSON answer
-            # TODO: add AJAX header
-            return HttpResponse('2')
+            return HttpResponse(json.dumps({'answer':2}), mimetype="application/json")
     else:
-        # TODO: add AJAX header
-        return HttpResponse('0')
+        return HttpResponse(json.dumps({'answer':0}), mimetype="application/json")
 
 
 class Error404(TemplateView):

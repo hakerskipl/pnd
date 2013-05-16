@@ -11,6 +11,7 @@ urlpatterns = patterns('',
     url(r'^szukaj/$', search, name='search'),
 
     url(r'^wspomoz-rewolucje/$', helpUs, name='help-us'),
+    url(r'^newsletter_sign_up', newsletterSignUp, name='newsletter-signup'),
 
     url(r'^404/$', Error404, name='404'),
     url(r'^500/$', Error500, name='500'),
