@@ -10,14 +10,14 @@
             		quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
             		consequat.</h3>
             		<div class="row helper">
-	            		<div class="span2 heads first success">
+	            		<div class="span2 heads first active">
 	            			<div class="step">1</div>
 	            		</div>
-	            		<div class="span10 heads first success">
+	            		<div class="span10 heads first active">
 	            			<h3>Zapisz się na newsletter</h3>
 	            			<p>Tekst wyjaśniający o co kaman i wgl.</p>
 	            		</div>
-	            		<div class="span10 offset2 content hidden">
+	            		<div class="span10 offset2 content">
 	            			<blockquote>
 								<form class="form-horizontal" method="POST" id="newsletter-singup" action="{% url 'newsletter-signup' %}">{% csrf_token %}
 								  <div class="control-group">
@@ -46,14 +46,14 @@
 	            		</div>
 	            	</div>
 	            	<div class="row helper">
-	            		<div class="span2 heads active">
+	            		<div class="span2 heads next">
 	            			<div class="step">2</div>
 	            		</div>
-	            		<div class="span10 heads active">
+	            		<div class="span10 heads next">
 	            			<h3>Polub nasz fanpejdż</h3>
 	            			<p>Tekst wyjaśniający o co kaman i wgl.</p>
 	            		</div>
-	            		<div class="span10 offset2 content">
+	            		<div class="span10 offset2 content hidden">
 	            			<blockquote>
 								<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 		            			tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -65,10 +65,10 @@
 	            		</div>
 	            	</div>
 	            	<div class="row helper">
-	            		<div class="span2 heads next">
+	            		<div class="span2 heads">
 	            			<div class="step">3</div>
 	            		</div>
-	            		<div class="span10 heads next">
+	            		<div class="span10 heads">
 	            			<h3>Udostępnij nas na fejsie</h3>
 	            			<p>Tekst wyjaśniający o co kaman i wgl.</p>
 	            		</div>
@@ -127,47 +127,6 @@
 {% block js-comp %}
 {% load compress %}
 {% compress js %}
-<script type="text/javascript">
-$(document).ready(function(){
-	var activeHelper = $('.active').first().parents('.row.helper');
-	console.log(activeHelper);
-	$('.row.helper').on('showtime', function(){
-		var sib = $(this).siblings();
-		sib.find('.content').addClass('hidden');
-		sib.find('.active').removeClass('active');
-		sib.find('.heads').removeClass('next');
-		$(this).find('.content').removeClass('hidden');
-		$(this).find('.heads').addClass('active').removeClass('next');
-		$(this).next().find('.heads').addClass('next');
-		// console.log($(this).find('.content'));
-	});
-	$('.row.helper').on('click', function(){
-		$(this).trigger('showtime');
-	});
-	$('#newsletter-singup').submit(function(event){
-		event.preventDefault();
-		// console.log( $(this).serializeArray() );
-		$.ajax({
-			url: $(this).attr('action'),
-			type: 'POST',
-			data: $(this).serialize(),
-			dataType: 'json'
-		}).done(function(data) {
-			// Bład wysyłki
-			if (data.answer == 0) {
-				alert('0');
-			}
-			// Sukces
-			if (data.answer == 1) {
-				alert('1');
-			}
-			// Źle wypełniony formularz
-			if (data.answer == 2) {
-				alert('2');
-			}
-		});
-	});
-});
-</script>
+<script src="{{STATIC_URL}}js/help-us.js"></script>
 {% endcompress %}
 {% endblock %}

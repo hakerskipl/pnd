@@ -64,7 +64,8 @@ def newsletterSignUp(request):
             signUp.save()
             return HttpResponse(json.dumps({'answer':1}), mimetype="application/json")
         else:
-            return HttpResponse(json.dumps({'answer':2}), mimetype="application/json")
+            jsonResponse = {'imie': form['imie'].errors, 'email': form['email'].errors}
+            return HttpResponse(json.dumps(jsonResponse), mimetype="application/json")
     else:
         return HttpResponse(json.dumps({'answer':0}), mimetype="application/json")
 
