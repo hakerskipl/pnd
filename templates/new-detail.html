@@ -11,11 +11,29 @@
                         <h3>{{ grammar|capfirst }} {{ place.name }}</h3>
                     </div>
                     <div class="body">
-                        <p>{{ place.address }}</p>
-                        <p>{{ place.email }}</p>
-                        <p>{{ place.phone }}</p>
-                        <p>{{ place.website }}</p>
-                        <p>{{ place.fb }}</p>
+                        <p>
+                        Adres: {{ place.address }}<br>
+                        {% if place.email %}
+                        Email: {{ place.email }}<br>
+                        {% endif %}
+                        {% if place.phone %}
+                        Telefon: {{ place.phone }}
+                        {% endif %}
+                        </p>
+
+                        <div class="row">
+                            {% if place.website and place.fb %}
+                            <div class="span3"><a href="{{ place.website }}" class="btn btn-block">Zobacz stronę lokalu</a></div>
+                            <div class="span3"><a href="{{ place.fb }}" class="btn btn-block">Zobacz fanpage lokalu</a></div>
+                            {% else %}
+                            {% if place.website %}
+                            <div class="span4 offset1"><a href="{{ place.website }}" class="btn btn-block">Zobacz stronę lokalu</a></div>
+                            {% endif %}
+                            {% if place.fb %}
+                            <div class="span4 offset1"><a href="{{ place.fb }}" class="btn btn-block">Zobacz fanpage lokalu</a></div>
+                            {% endif %}
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
                 <!-- O lokalu -->
@@ -36,7 +54,7 @@
                         <p>
                             <ul class="inline">
                                 {% for tag in place.tags.all %}
-                                <li><i class="icon-tags"></i> {{ tag.name }}</li>
+                                <li>{% if tag.icon %}<img src="{{STATIC_URL}}img/icons/{{ tag.icon}}.png" class="tag-icon" alt="{{ tag.name }}">{% else %}<i class="icon-tags"></i>{% endif %} {{ tag.name }}</li>
                                 {% endfor %}
                             </ul>
                         </p>

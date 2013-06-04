@@ -30,7 +30,6 @@ $(document).ready(function(){
 			}
 			// Sukces
 			else if (data.answer == 1) {
-				alert('1');
 				var parent = $('.active').first().parents('.row.helper');
 				parent.find('.heads').addClass('success');
 				parent.find('.heads').removeClass('active');
@@ -52,4 +51,18 @@ $(document).ready(function(){
 		});
 		console.log(activeHelper);
 	});
+	
+	// Like 
+	FB.Event.subscribe('edge.create',
+	    function(response) {
+	        alert('You liked the URL: ' + response);
+	    }
+	);
+
+	// Send
+	FB.Event.subscribe('message.send',
+	    function(response) {
+	        alert('You send the URL: ' + response);
+	    }
+	);
 });
